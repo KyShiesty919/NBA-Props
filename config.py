@@ -12,6 +12,16 @@ if _env.exists():
         if "=" in _l and not _l.startswith("#"):
             _k, _v = _l.split("=", 1); os.environ.setdefault(_k.strip(), _v.strip())
 
+# Pin the process clock to US/Eastern so "today" and "HHMM" match the NBA
+# calendar day wherever this runs (the hourly cloud task runs in UTC, where
+# 8pm-ET tips are already "tomorrow" and would be skipped by --close).
+os.environ["TZ"] = "America/New_York"
+try:
+    import time as _time
+    _time.tzset()
+except AttributeError:   # Windows has no tzset; local clock is used as-is
+    pass
+
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 OUT_DIR = ROOT / "outputs"
