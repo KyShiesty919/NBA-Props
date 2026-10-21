@@ -29,7 +29,7 @@ from model import blend_team_stats, build_projections, evaluate, pick_bets
 
 LEDGER_COLS = ["date", "game", "player_id", "player", "player_key", "team", "opp", "stat", "side",
                "line", "book", "price", "projection", "model_prob", "mkt_fair_prob", "blended_prob",
-               "edge", "ev_per_dollar", "stake", "event_id", "fetched_utc",
+               "edge", "ev_per_dollar", "stake", "n_cur", "dtd", "inj_note", "event_id", "fetched_utc",
                "actual", "result", "close_price", "close_fair_prob", "clv", "profit"]
 
 
