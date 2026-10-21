@@ -20,7 +20,8 @@ from config import (PRIOR_SHRINK_K, TEAM_SHRINK_K, MIN_GAMES_TOTAL, MINUTES_LOOK
                     MAX_DISAGREE, OPP_ADJ_STRENGTH, PACE_ADJ_STRENGTH, HOME_PTS_BUMP,
                     B2B_MINUTES_MULT, MARKET_WEIGHT, MIN_EDGE, MIN_BOOKS, BANKROLL,
                     KELLY_FRACTION, MAX_BET_PCT, MAX_PLAYER_PCT, BETTABLE_BOOKS, MIN_N_CUR,
-                    SKIP_USAGE_MODEL_BETS, BET_SIDES, BLOWOUT_SPREAD, BLOWOUT_MIN_N_CUR)
+                    SKIP_USAGE_MODEL_BETS, BET_SIDES, BLOWOUT_SPREAD, BLOWOUT_MIN_N_CUR,
+                    OVER_MAX_SPREAD, OVER_MIN_PROJ_REL, OVER_MIN_OPP_ALLOW_REL, OVER_STAKE_MULT)
 from fetch_lines import norm_name, american_to_prob, prob_to_american
 
 STATS = ["PTS", "REB", "AST", "FG3M"]
@@ -176,6 +177,7 @@ def build_projections(cur, prior, teams, slate, game_date, rosters=None, injurie
                     row[f"mu_{s}"] = round(mu, 2)
                     row[f"var_{s}"] = r[f"var_{s}"] * var_scale
                     row[f"posdef_{s}"] = round(pos_rel, 3)
+                    row[f"opprel_{s}"] = round(team_rel, 3)
                     mu_sum += mu if s != "FG3M" else 0
                 row["mu_PRA"] = round(mu_sum, 2)
                 row["var_PRA"] = r["var_PRA"] * var_scale
@@ -249,8 +251,10 @@ def evaluate(proj: pd.DataFrame, lines: pd.DataFrame) -> pd.DataFrame:
             "book_implied", "mkt_fair_prob", "model_prob", "blended_prob", "edge",
             "ev_per_dollar", "fair_price", "kelly_full", "stake", "p_push", "market_weight",
             "disagree", "suspicious", "dtd", "inj_status", "inj_note", "min_boost", "pos", "abs_spread",
+            "opp_allow_rel",
             "event_id", "player_id", "player_key", "fetched_utc", "tip_utc"]
     res["projection"] = res.apply(lambda r: r[f"mu_{r['stat']}"], axis=1)
+    res["opp_allow_rel"] = res.apply(lambda r: r[f"opprel_{'PTS' if r['stat'] == 'PRA' else r['stat']}"], axis=1)
     keep.insert(9, "projection")
     keep.remove("mu_PTS")
     return res[[c for c in keep if c in res.columns]].sort_values("edge", ascending=False)
@@ -268,10 +272,15 @@ def pick_bets(evald: pd.DataFrame) -> pd.DataFrame:
         ok = ok[ok["side"].isin(BET_SIDES)]
     no_inj = ok["inj_note"].fillna("").astype(str).str.len() == 0 if "inj_note" in ok.columns else True
     spread = ok["abs_spread"] if "abs_spread" in ok.columns else pd.Series(np.nan, index=ok.index)
-    core = (ok["n_cur"] >= MIN_N_CUR) & (no_inj if SKIP_USAGE_MODEL_BETS else True)
-    blowout = (spread >= BLOWOUT_SPREAD) & (ok["n_cur"] >= BLOWOUT_MIN_N_CUR)
-    ok = ok.assign(tier=np.where(blowout, "blowout", np.where(core, "core", "")))
+    under = ok["side"] == "under"
+    core = under & (ok["n_cur"] >= MIN_N_CUR) & (no_inj if SKIP_USAGE_MODEL_BETS else True)
+    blowout = under & (spread >= BLOWOUT_SPREAD) & (ok["n_cur"] >= BLOWOUT_MIN_N_CUR)
+    over_ok = ((ok["side"] == "over") & (spread <= OVER_MAX_SPREAD)
+               & (ok["projection"] / ok["line"].clip(lower=0.5) >= OVER_MIN_PROJ_REL)
+               & (ok["opp_allow_rel"] >= OVER_MIN_OPP_ALLOW_REL) & (ok["n_cur"] >= BLOWOUT_MIN_N_CUR))
+    ok = ok.assign(tier=np.where(blowout, "blowout", np.where(core, "core", np.where(over_ok, "over (experimental)", ""))))
     ok = ok[ok["tier"] != ""]
+    ok.loc[ok["tier"] == "over (experimental)", "stake"] = (ok.loc[ok["tier"] == "over (experimental)", "stake"] * OVER_STAKE_MULT).round(2)
     # one bet per player/stat/side: the one with the best EV (handles alt lines across books)
     ok = ok.sort_values("ev_per_dollar", ascending=False).drop_duplicates(["player_key", "stat", "side"])
     # never both sides of the same player/stat

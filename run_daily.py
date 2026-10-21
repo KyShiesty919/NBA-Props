@@ -108,15 +108,17 @@ def main():
     cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake", "n_cur"]
     if not bets.empty:
         print("\nTOP BETS (tier: blowout = under in a 10+ pt spread game, the strongest angle in the backtest; "
-              "core = under, 10+ games, no injury-driven projection)\n"
+              "core = under, 10+ games, no injury-driven projection; over (experimental) = close game, model 5%+ "
+              "above the line, opponent allows above average — half stakes, weak evidence)\n"
               + bets[["tier", "abs_spread"] + cols].head(20).to_string(index=False))
     else:
         watch = evald[(evald["edge"] >= config.MIN_EDGE) & (~evald["suspicious"])
                       & (evald["book"].isin(config.BETTABLE_BOOKS) if config.BETTABLE_BOOKS else True)
                       ].sort_values("edge", ascending=False)
         watch = watch.drop_duplicates(["player_key", "stat"]).head(10)
-        print(f"\nNO BETS qualify (unders only; core tier needs {config.MIN_N_CUR}+ games and no usage-model involvement, "
-              f"blowout tier needs a {config.BLOWOUT_SPREAD:.0f}+ pt spread and {config.BLOWOUT_MIN_N_CUR}+ games). "
+        print(f"\nNO BETS qualify (core tier needs {config.MIN_N_CUR}+ games and no usage-model involvement, "
+              f"blowout tier needs a {config.BLOWOUT_SPREAD:.0f}+ pt spread and {config.BLOWOUT_MIN_N_CUR}+ games; "
+              f"experimental over tier needs a close game, projection 5%+ over the line, a soft opponent, and {config.BLOWOUT_MIN_N_CUR}+ games). "
               f"Watchlist of what the model likes anyway — NOT recommendations:\n" + watch[cols].to_string(index=False))
 
 
@@ -165,7 +167,7 @@ def write_xlsx(path, bets, evald, proj, lines, inj=None):
     bet_cols = ["tier", "abs_spread", "game", "player", "team", "opp", "stat", "side", "line", "book", "price",
                 "projection", "minutes", "model_prob", "mkt_fair_prob", "blended_prob", "edge",
                 "ev_per_dollar", "fair_price", "stake", "n_books", "n_cur", "new_team", "b2b",
-                "market_weight", "disagree", "suspicious", "dtd", "inj_status", "min_boost", "inj_note"]
+                "market_weight", "disagree", "suspicious", "dtd", "inj_status", "min_boost", "inj_note", "opp_allow_rel"]
     proj_cols = ["game", "player", "team", "opp", "pos", "home", "b2b", "minutes", "min_boost", "n_cur", "new_team",
                  "dtd", "inj_status", "inj_note", "mu_PTS", "mu_REB", "mu_AST", "mu_FG3M", "mu_PRA",
                  "posdef_PTS", "posdef_REB", "posdef_AST", "posdef_FG3M"]

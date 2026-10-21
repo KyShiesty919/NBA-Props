@@ -71,7 +71,15 @@ MARKET_WEIGHT_K = 6         # weight = floor + (early - floor) * K / (K + n_cur)
 #     samples and monotonic in spread. Starters sit in blowouts; props don't fully price it.
 #   * Morning lines closed toward the model's side 56-59% of the time (+0.6 pts avg CLV): bet mornings.
 #   * Alt lines and double-doubles: -25% to -40% (longshot bias). Not offered.
-BET_SIDES = {"under"}     # overs are off the board
+BET_SIDES = {"under", "over"}   # overs only via the experimental over tier below
+# OVER tier (over_finder.py): 33k over lines; overs hit ~1 pt BELOW the market's fair price in nearly every
+# cut, so overs must clear the vig and that shade. The only rule that held blind: close game, model
+# >=5% above the line, opponent allows above average at that stat. +4.4% fit (702) / +4.7% blind (383),
+# z ~ 1 each. Weak evidence -> half stakes, labelled experimental. Cut it if it's negative after 150 bets.
+OVER_MAX_SPREAD = 6.0
+OVER_MIN_PROJ_REL = 1.05
+OVER_MIN_OPP_ALLOW_REL = 1.02
+OVER_STAKE_MULT = 0.5
 BLOWOUT_SPREAD = 10.0     # |spread| at or above this = "blowout" tier
 BLOWOUT_MIN_N_CUR = 5     # blowout-tier unders need this many games this season (usage-model bets allowed)
 MIN_N_CUR = 10            # core tier: no bets on a player until he has this many games this season

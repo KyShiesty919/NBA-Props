@@ -32,7 +32,7 @@ is still there as a manual override for late scratches the feed hasn't caught.
 
 | Sheet | What |
 |---|---|
-| **Bets** | What clears the bar — unders only, `tier` = blowout (10+ pt spread) or core; one bet per player/stat, best price across books, quarter-Kelly stake capped at 3% of bankroll |
+| **Bets** | What clears the bar — `tier` = blowout (under, 10+ pt spread), core (under), or over (experimental, half stakes); one bet per player/stat, best price across books, quarter-Kelly stake capped at 3% of bankroll |
 | **All lines** | Every book/line/side the model priced, with model prob, market fair prob, blended prob, edge, EV |
 | **Projections** | Raw means per player (minutes, PTS, REB, AST, 3PM, PRA) |
 | **Raw lines** | Exactly what the Odds API returned |
@@ -101,8 +101,21 @@ Second round (`backtest_angles.py`, spreads + morning + alt-line snapshots, blin
 | Alt points ladders | — | −40% | Longshot bias. Not offered. |
 | Double-doubles | — | −26% | Same. |
 
-So production bets **unders only**, in two tiers: `core` (10+ games, no usage-model involvement)
-and `blowout` (10+ point spread, 5+ games). Expect ~250 core and ~200 blowout bets a season.
+Third round (`over_finder.py`): 33,341 over lines with 31 as-of-date features (spread, rest, minutes
+trend, form, L10 hit rate, pace, opponent defense, history vs opponent, market shape...).
+**Overs hit ~1 point below the market's own fair price in nearly every bucket** — books shade
+overs because the public buys them — so an over must beat the vig *and* that shade. A gradient
+boosted model found +18% in-sample and −6% blind (overfit). The one hand rule that held:
+
+| Over rule | Fit 2023-25 | Blind 2025-26 |
+|---|---|---|
+| spread ≤ 6, projection ≥ 5% over the line, opponent allows ≥ 2% above avg | +4.4% (702) | +4.7% (383), z ≈ 1 |
+
+So production bets three tiers: `blowout` (unders, 10+ point spread, 5+ games), `core` (unders,
+10+ games, no usage-model involvement) and `over (experimental)` (the rule above, half stakes,
+5+ games — cut it if it's negative after 150 live bets). Expect ~200 / ~250 / ~350 bets a season.
+For overs beyond that tier, the positive-EV path is **odds boosts**: a −5% over becomes +EV at a
+20–25% boost, and the model is the filter for which boosts to take.
 
 Takeaways:
 - The raw model is **less** accurate than the market (Brier 0.248 vs 0.244). Blended with the
