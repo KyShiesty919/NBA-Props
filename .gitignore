@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 data/demo_players.csv
 data/lines_demo/
+data/hist_lines/
+outputs/bt_lines_*.pkl

@@ -23,7 +23,8 @@ WEB = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba"
 HDR = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36"}
 # ESPN abbreviations that differ from the common ones used by books
 ESPN_TO_STD = {"GS": "GSW", "NO": "NOP", "NY": "NYK", "SA": "SAS", "UTAH": "UTA", "WSH": "WAS"}
-SEASON_START = {"2025-26": date(2025, 10, 21), "2026-27": date(2026, 10, 20)}
+SEASON_START = {"2022-23": date(2022, 10, 18), "2023-24": date(2023, 10, 24), "2024-25": date(2024, 10, 22),
+                "2025-26": date(2025, 10, 21), "2026-27": date(2026, 10, 20)}
 
 
 def _year(season: str) -> int:        # "2026-27" -> 2027 (ESPN uses the end year)
