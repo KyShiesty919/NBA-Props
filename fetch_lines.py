@@ -4,6 +4,7 @@ Pull NBA player-prop lines from The Odds API and flatten to one row per
 so you can grade closing-line value later: run once in the morning (bet-time
 snapshot) and once again ~15 min before the first tip (closing snapshot).
 """
+import gzip
 import json
 import sys
 import time
@@ -77,8 +78,8 @@ def fetch_lines(tag: str = "open") -> pd.DataFrame:
     events = fetch_events()
     now = datetime.now(timezone.utc)
     today_local = datetime.now().date()
-    snap = LINES_DIR / f"{today_local.isoformat()}_{tag}.json"
-    existing = json.loads(snap.read_text())["data"] if (tag == "close" and snap.exists()) else []
+    snap = LINES_DIR / f"{today_local.isoformat()}_{tag}.json.gz"
+    existing = _read_snap(snap)["data"] if (tag == "close" and snap.exists()) else []
     have = {item["event"]["id"] for item in existing}
     raw = []
     for ev in events:
@@ -91,7 +92,7 @@ def fetch_lines(tag: str = "open") -> pd.DataFrame:
         time.sleep(0.3)
     merged = existing + raw
     if raw or not snap.exists():
-        snap.write_text(json.dumps({"fetched_utc": now.isoformat(), "data": merged}))
+        _write_snap(snap, {"fetched_utc": now.isoformat(), "data": merged})
     print(f"{tag}: captured {len(raw)} new events ({len(merged)} total) -> {snap}", file=sys.stderr)
     return flatten(raw if tag == "open" else merged, now)
 
@@ -120,11 +121,19 @@ def flatten(raw: list, fetched: datetime) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def _read_snap(p: Path) -> dict:
+    return json.loads(gzip.decompress(p.read_bytes()).decode())
+
+
+def _write_snap(p: Path, obj: dict):
+    p.write_bytes(gzip.compress(json.dumps(obj).encode()))
+
+
 def load_snapshot(day: str, tag: str) -> pd.DataFrame | None:
-    p = LINES_DIR / f"{day}_{tag}.json"
+    p = LINES_DIR / f"{day}_{tag}.json.gz"
     if not p.exists():
         return None
-    js = json.loads(p.read_text())
+    js = _read_snap(p)
     return flatten(js["data"], datetime.fromisoformat(js["fetched_utc"]))
 
 

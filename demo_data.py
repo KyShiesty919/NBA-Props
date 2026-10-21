@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 
 from config import TEAM_ABBR, DATA_DIR
-from fetch_lines import norm_name, flatten, LINES_DIR
+from fetch_lines import norm_name, flatten, LINES_DIR, _write_snap
 
 RNG = np.random.default_rng(7)
 TEAMS = sorted(set(TEAM_ABBR.values()))
@@ -94,7 +94,7 @@ def _lines(players, slate, today):
             bks.append({"key": bk, "markets": mkts})
         raw.append({"event": ev, "odds": {"bookmakers": bks}})
     now = datetime.now(timezone.utc)
-    (LINES_DIR / f"{today.isoformat()}_open.json").write_text(json.dumps({"fetched_utc": now.isoformat(), "data": raw}, default=str))
+    _write_snap(LINES_DIR / f"{today.isoformat()}_open.json.gz", json.loads(json.dumps({"fetched_utc": now.isoformat(), "data": raw}, default=str)))
     open_df = flatten(raw, now)
     # fake closing snapshot: shift a few prices so CLV has something to show
     for item in raw:
@@ -102,7 +102,7 @@ def _lines(players, slate, today):
             for m in bk["markets"]:
                 for o in m["outcomes"]:
                     o["price"] += int(RNG.choice([-10, 0, 0, 10]))
-    (LINES_DIR / f"{today.isoformat()}_close.json").write_text(json.dumps({"fetched_utc": now.isoformat(), "data": raw}, default=str))
+    _write_snap(LINES_DIR / f"{today.isoformat()}_close.json.gz", json.loads(json.dumps({"fetched_utc": now.isoformat(), "data": raw}, default=str)))
     return open_df
 
 

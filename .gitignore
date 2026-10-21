@@ -1,6 +1,3 @@
 __pycache__/
 *.pyc
-.env
-outputs/*.xlsx
-data/lines/*.json
 data/demo_players.csv
