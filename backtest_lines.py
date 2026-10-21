@@ -65,11 +65,28 @@ def _get(url, params):
     return None, None
 
 
-def fetch_day(season: str, d: date) -> int:
+SNAPS = {
+    # tag: (markets, how to pick the snapshot time)
+    "close":   (list(config.MARKETS), "tip-2h"),
+    "morning": (list(config.MARKETS), "10am"),
+    "extras":  (["player_points_alternate", "player_double_double", "spreads"], "tip-2h"),   # 30 credits/game
+    "spreads": (["spreads"], "tip-2h"),                                                      # 10 credits/game
+}
+
+
+def _snap_time(tip: datetime, rule: str) -> datetime:
+    if rule == "10am":
+        local = tip + timedelta(hours=ET)
+        return datetime(local.year, local.month, local.day, 15, 0, tzinfo=timezone.utc)   # ~10-11am ET
+    return (tip - timedelta(hours=2)).replace(second=0, microsecond=0)
+
+
+def fetch_day(season: str, d: date, tag: str = "close") -> int:
     """Fetch and cache all games on ET date d. Returns credits spent (approx)."""
-    out = HIST / season / f"{d.isoformat()}.json.gz"
+    out = HIST / season / (f"{d.isoformat()}.json.gz" if tag == "close" else f"{d.isoformat()}_{tag}.json.gz")
     if out.exists():
         return 0
+    markets, rule = SNAPS[tag]
     out.parent.mkdir(parents=True, exist_ok=True)
     # events list as of noon ET that day
     at = datetime(d.year, d.month, d.day, 17, 0, tzinfo=timezone.utc)
@@ -82,21 +99,21 @@ def fetch_day(season: str, d: date) -> int:
         tip = datetime.fromisoformat(ev["commence_time"].replace("Z", "+00:00"))
         if (tip + timedelta(hours=ET)).date() != d:
             continue
-        snap_at = (tip - timedelta(hours=2)).replace(second=0, microsecond=0)
+        snap_at = _snap_time(tip, rule)
         odds, rem = _get(f"{API}/events/{ev['id']}/odds", {
-            "regions": "us", "markets": ",".join(config.MARKETS), "oddsFormat": "american",
+            "regions": "us", "markets": ",".join(markets), "oddsFormat": "american",
             "date": snap_at.isoformat().replace("+00:00", "Z")})
-        spent += 50
+        spent += 10 * len(markets)
         if odds and odds.get("data"):
             raw.append({"event": ev, "odds": odds["data"], "snapshot": odds.get("timestamp")})
         time.sleep(0.2)
     out.write_bytes(gzip.compress(json.dumps({"date": d.isoformat(), "data": raw}).encode()))
-    print(f"  {d}: {len(raw)} games cached, ~{spent} credits, {rem} remaining", flush=True)
+    print(f"  {d} [{tag}]: {len(raw)} games cached, ~{spent} credits, {rem} remaining", flush=True)
     return spent
 
 
-def load_day(season: str, d: date):
-    p = HIST / season / f"{d.isoformat()}.json.gz"
+def load_day(season: str, d: date, tag: str = "close"):
+    p = HIST / season / (f"{d.isoformat()}.json.gz" if tag == "close" else f"{d.isoformat()}_{tag}.json.gz")
     if not p.exists():
         return None
     js = json.loads(gzip.decompress(p.read_bytes()).decode())
@@ -184,7 +201,7 @@ def run_season(season: str):
     t_prior = team_stats_asof(prior_season, pd.Timestamp(SEASON_END[prior_season] + timedelta(days=30)))
     ros = rosters()
     pos_map = ros.set_index("PLAYER_ID")["POS"].map(pos_group).to_dict()
-    days = sorted(date.fromisoformat(p.name[:10]) for p in (HIST / season).glob("*.json.gz")) if (HIST / season).exists() else []
+    days = sorted(date.fromisoformat(p.name[:10]) for p in (HIST / season).glob("??????????.json.gz")) if (HIST / season).exists() else []
     ev_all, bet_all = [], []
     for d in days:
         t0 = time.time()
@@ -280,9 +297,11 @@ if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "fetch":
         season, n = sys.argv[2], int(sys.argv[3])
+        tag = sys.argv[4] if len(sys.argv) > 4 else "close"
+        every = int(sys.argv[5]) if len(sys.argv) > 5 else 1      # take every k-th sampled day
         total = 0
-        for d in sample_days(season, n):
-            total += fetch_day(season, d)
+        for d in sample_days(season, n)[::every]:
+            total += fetch_day(season, d, tag)
         print(f"{season}: ~{total} credits spent this run")
     elif cmd == "run":
         run_season(sys.argv[2])
