@@ -101,58 +101,83 @@ def project_player(p_cur: pd.DataFrame, p_prior: pd.DataFrame) -> dict | None:
     return out
 
 
-def build_projections(cur, prior, teams, slate, game_date) -> pd.DataFrame:
+def build_projections(cur, prior, teams, slate, game_date, rosters=None, injuries=None) -> pd.DataFrame:
     """
     slate: DataFrame with columns home, away (abbreviations) for tonight.
-    Returns one row per player on the slate with projected mean/variance per stat.
+    Returns one row per available player on the slate with projected mean/variance per stat,
+    after removing OUT players, redistributing their minutes/usage, and applying
+    team + position matchup adjustments.
     """
+    from injuries import pos_group
+    from usage import redistribute, opponent_by_position
+
     teams = teams.copy()
     if "ABBR" not in teams.columns:
         teams["ABBR"] = teams["TEAM_ID"].map(team_abbr_map(cur, prior))
     tstat = teams.set_index("ABBR")
     id_to_abbr = teams.set_index("TEAM_ID")["ABBR"].to_dict()
-    rows = []
-    players_cur = cur.groupby("PLAYER_ID")
-    players_pri = prior.groupby("PLAYER_ID")
-    # which team is each player on right now?
-    # TEAM_ID on every log row is the player's CURRENT (roster) team; TEAM_ABBREVIATION is who he played for that night
-    current_team = {pid: id_to_abbr.get(tid) for pid, tid in
-                    pd.concat([prior, cur]).groupby("PLAYER_ID")["TEAM_ID"].last().items()}
-    names = pd.concat([prior, cur]).groupby("PLAYER_ID")["PLAYER_NAME"].last().to_dict()
+    logs = pd.concat([prior, cur], ignore_index=True)
+    players_cur, players_pri = cur.groupby("PLAYER_ID"), prior.groupby("PLAYER_ID")
+    current_team = {pid: id_to_abbr.get(tid) for pid, tid in logs.groupby("PLAYER_ID")["TEAM_ID"].last().items()}
+    names = logs.groupby("PLAYER_ID")["PLAYER_NAME"].last().to_dict()
+    pos_map = (rosters.set_index("PLAYER_ID")["POS"].map(pos_group).to_dict() if rosters is not None else {})
+    posdef = opponent_by_position(logs, pos_map) if pos_map else None
+    inj = injuries if injuries is not None else pd.DataFrame(columns=["player_key", "team", "is_out", "is_dtd", "status"])
 
+    def inj_status(pid, team):
+        key = norm_name(names[pid])
+        m = inj[(inj["player_key"] == key) & ((inj["team"] == team) | (inj["team"] == ""))]
+        if m.empty:
+            return "", False, False
+        r = m.iloc[0]
+        return r["status"], bool(r["is_out"]), bool(r["is_dtd"])
+
+    rows = []
     for _, g in slate.iterrows():
         for team, opp, home in ((g["home"], g["away"], True), (g["away"], g["home"], False)):
             if team not in tstat.index or opp not in tstat.index:
                 continue
-            pids = [pid for pid, t in current_team.items() if t == team]
-            # back-to-back: team played yesterday
             team_logs = cur[cur["TEAM_ABBREVIATION"] == team]
-            b2b = (not team_logs.empty) and (
-                (pd.Timestamp(game_date) - team_logs["GAME_DATE"].max()).days == 1)
-            for pid in pids:
+            b2b = (not team_logs.empty) and ((pd.Timestamp(game_date) - team_logs["GAME_DATE"].max()).days == 1)
+            base_rows = []
+            for pid in [p for p, t in current_team.items() if t == team]:
                 pc = players_cur.get_group(pid) if pid in players_cur.groups else cur.iloc[0:0]
                 pp = players_pri.get_group(pid) if pid in players_pri.groups else prior.iloc[0:0]
                 base = project_player(pc, pp)
                 if base is None:
                     continue
-                minutes = base["minutes"] * (B2B_MINUTES_MULT if b2b else 1.0)
-                pace_adj = 1 + PACE_ADJ_STRENGTH * (tstat.loc[opp, "PACE_REL"] - 1)
-                new_team = bool(len(pp) and pp["TEAM_ABBREVIATION"].iloc[-1] != team)
-                row = {"player_id": pid, "player": names[pid], "player_key": norm_name(names[pid]),
-                       "team": team, "opp": opp, "home": home, "b2b": b2b,
-                       "minutes": round(minutes, 1), "n_cur": base["n_cur"],
-                       "new_team": new_team, "game": f"{g['away']} @ {g['home']}"}
+                status, is_out, is_dtd = inj_status(pid, team)
+                base_rows.append({**base, "player_id": pid, "player": names[pid], "pos_group": pos_map.get(pid, "F"),
+                                  "inj_status": status, "is_out": is_out, "dtd": is_dtd,
+                                  "new_team": bool(len(pp) and pp["TEAM_ABBREVIATION"].iloc[-1] != team)})
+            if not base_rows:
+                continue
+            tdf = pd.DataFrame(base_rows)
+            avail = redistribute(tdf[~tdf["is_out"]].reset_index(drop=True), tdf[tdf["is_out"]], logs)
+            pace_adj = 1 + PACE_ADJ_STRENGTH * (tstat.loc[opp, "PACE_REL"] - 1)
+            for _, r in avail.iterrows():
+                minutes = r["minutes"] * (B2B_MINUTES_MULT if b2b else 1.0)
+                var_scale = minutes / max(r["minutes_base"], 1)
+                row = {"player_id": r["player_id"], "player": r["player"], "player_key": norm_name(r["player"]),
+                       "team": team, "opp": opp, "home": home, "b2b": b2b, "pos": r["pos_group"],
+                       "minutes": round(minutes, 1), "min_boost": r.get("min_boost", 0.0), "n_cur": r["n_cur"],
+                       "new_team": r["new_team"], "dtd": r["dtd"], "inj_status": r["inj_status"],
+                       "inj_note": r.get("inj_note", ""), "game": f"{g['away']} @ {g['home']}"}
                 mu_sum = 0.0
                 for s in STATS:
-                    opp_adj = 1 + OPP_ADJ_STRENGTH * (tstat.loc[opp, OPP_COL[s] + "_REL"] - 1)
-                    mu = minutes * base[f"rate_{s}"] * opp_adj * pace_adj
+                    team_rel = tstat.loc[opp, OPP_COL[s] + "_REL"]
+                    pos_rel = (posdef.loc[(opp, r["pos_group"]), f"REL_{s}"]
+                               if posdef is not None and (opp, r["pos_group"]) in posdef.index else team_rel)
+                    opp_adj = 1 + OPP_ADJ_STRENGTH * (0.5 * (team_rel - 1) + 0.5 * (pos_rel - 1))
+                    mu = minutes * r[f"rate_{s}"] * opp_adj * pace_adj
                     if s == "PTS" and home:
                         mu *= 1 + HOME_PTS_BUMP
                     row[f"mu_{s}"] = round(mu, 2)
-                    row[f"var_{s}"] = base[f"var_{s}"]
+                    row[f"var_{s}"] = r[f"var_{s}"] * var_scale
+                    row[f"posdef_{s}"] = round(pos_rel, 3)
                     mu_sum += mu if s != "FG3M" else 0
                 row["mu_PRA"] = round(mu_sum, 2)
-                row["var_PRA"] = base["var_PRA"]
+                row["var_PRA"] = r["var_PRA"] * var_scale
                 rows.append(row)
     return pd.DataFrame(rows)
 
@@ -200,15 +225,18 @@ def evaluate(proj: pd.DataFrame, lines: pd.DataFrame) -> pd.DataFrame:
         mkt = r.get("mkt_fair_over")
         mkt_side = (mkt if r["side"] == "over" else 1 - mkt) if pd.notna(mkt) else np.nan
         mw = MARKET_WEIGHT + (MARKET_WEIGHT_EARLY - MARKET_WEIGHT) * MARKET_WEIGHT_K / (MARKET_WEIGHT_K + r["n_cur"])
+        if r.get("new_team") and r["n_cur"] < 15:
+            mw = max(mw, MARKET_WEIGHT_EARLY)      # last year's role on another team: trust the book more
         blended = (mw * mkt_side + (1 - mw) * model_side if pd.notna(mkt_side) else model_side)
         disagree = abs(r[f"mu_{s}"] - r["line"]) / max(r["line"], 1.0)
+        max_dis = MAX_DISAGREE * (0.67 if (r.get("new_team") and r["n_cur"] < 15) else 1.0)
         dec = (r["price"] / 100 + 1) if r["price"] > 0 else (100 / -r["price"] + 1)
         ev = blended * (dec - 1) - (1 - blended)          # per $1 staked
         kelly = max(0.0, (blended * (dec - 1) - (1 - blended)) / (dec - 1))
         stake = min(kelly * KELLY_FRACTION, MAX_BET_PCT) * BANKROLL
         edge = blended - mkt_side if pd.notna(mkt_side) else np.nan
         out.append({**r.to_dict(), "p_push": round(p_push, 3), "market_weight": round(mw, 2),
-                    "disagree": round(disagree, 3), "suspicious": bool(disagree > MAX_DISAGREE),
+                    "disagree": round(disagree, 3), "suspicious": bool(disagree > max_dis),
                     "model_prob": round(model_side, 4), "mkt_fair_prob": round(mkt_side, 4) if pd.notna(mkt_side) else np.nan,
                     "blended_prob": round(blended, 4), "edge": round(edge, 4) if pd.notna(edge) else np.nan,
                     "ev_per_dollar": round(ev, 4), "fair_price": prob_to_american(blended),
@@ -219,7 +247,7 @@ def evaluate(proj: pd.DataFrame, lines: pd.DataFrame) -> pd.DataFrame:
             "mu_" + "PTS", "minutes", "n_cur", "new_team", "b2b", "n_books", "hold",
             "book_implied", "mkt_fair_prob", "model_prob", "blended_prob", "edge",
             "ev_per_dollar", "fair_price", "kelly_full", "stake", "p_push", "market_weight",
-            "disagree", "suspicious",
+            "disagree", "suspicious", "dtd", "inj_status", "inj_note", "min_boost", "pos",
             "event_id", "player_id", "player_key", "fetched_utc", "tip_utc"]
     res["projection"] = res.apply(lambda r: r[f"mu_{r['stat']}"], axis=1)
     keep.insert(9, "projection")
@@ -241,6 +269,9 @@ def pick_bets(evald: pd.DataFrame) -> pd.DataFrame:
     ok = ok.drop_duplicates(["player_key", "stat"])
     # cap exposure per player
     ok = ok.copy()
+    # day-to-day players: half stake
+    if "dtd" in ok.columns:
+        ok.loc[ok["dtd"].astype(bool), "stake"] = (ok.loc[ok["dtd"].astype(bool), "stake"] / 2).round(2)
     cum = ok.groupby("player_key")["stake"].cumsum()
     ok["stake"] = np.where(cum > MAX_PLAYER_PCT * BANKROLL,
                            np.clip(MAX_PLAYER_PCT * BANKROLL - (cum - ok["stake"]), 0, None), ok["stake"])

@@ -5,7 +5,10 @@ calibration, and closing-line value (CLV) when a 'close' snapshot exists.
     python grade.py            # grade everything ungraded, print report
     python grade.py --demo     # grade using synthetic results (pipeline test)
 """
+import os
 import sys
+if "--demo" in sys.argv:
+    os.environ["LINES_SUBDIR"] = "lines_demo"
 from datetime import date, datetime
 
 import numpy as np

@@ -12,7 +12,10 @@ Typical day:
    pre-tip:   python run_daily.py --close  -> captures closing lines for CLV
    next day:  python grade.py              -> hit rate / ROI / calibration / CLV
 """
+import os
 import sys
+if "--demo" in sys.argv:
+    os.environ["LINES_SUBDIR"] = "lines_demo"
 from datetime import date
 
 import pandas as pd
@@ -66,14 +69,16 @@ def main():
     lines = devig(lines)
     slate = lines[["home", "away"]].drop_duplicates()
     teams = blend_team_stats(t_cur, t_prior)
-    proj = build_projections(cur, prior, teams, slate, today)
-    # Manual injury/rest overrides: data/out.csv with a 'player' column (one name per row)
-    out_file = config.DATA_DIR / "out.csv"
-    if out_file.exists():
-        from fetch_lines import norm_name
-        out_keys = {norm_name(n) for n in pd.read_csv(out_file)["player"].dropna()}
-        proj = proj[~proj["player_key"].isin(out_keys)]
-        print(f"Excluded {len(out_keys)} players listed in data/out.csv")
+    if demo:
+        rosters, inj = None, None
+    else:
+        from fetch_stats import rosters as _rosters
+        from injuries import fetch_injuries
+        rosters, inj = _rosters(), fetch_injuries()
+        on_slate = inj[inj["team"].isin(set(slate["home"]) | set(slate["away"]))]
+        print(f"Injury report: {int(on_slate['is_out'].sum())} OUT, {int(on_slate['is_dtd'].sum())} day-to-day on tonight's slate "
+              f"({len(inj)} league-wide).")
+    proj = build_projections(cur, prior, teams, slate, today, rosters, inj)
     print(f"{len(proj)} players projected across {len(slate)} games.")
     evald = evaluate(proj, lines)
     bets = pick_bets(evald)
@@ -81,7 +86,7 @@ def main():
 
     # ---- outputs -----------------------------------------------------------
     out = OUT_DIR / f"{today.isoformat()}_props{'_demo' if demo else ''}.xlsx"
-    write_xlsx(out, bets, evald, proj, lines)
+    write_xlsx(out, bets, evald, proj, lines, inj)
     print(f"Wrote {out}")
 
     if "--no-ledger" not in args and not bets.empty:
@@ -113,13 +118,14 @@ def append_ledger(bets: pd.DataFrame, today: date):
     rows.to_csv(LEDGER, index=False)
 
 
-def write_xlsx(path, bets, evald, proj, lines):
+def write_xlsx(path, bets, evald, proj, lines, inj=None):
     bet_cols = ["game", "player", "team", "opp", "stat", "side", "line", "book", "price",
                 "projection", "minutes", "model_prob", "mkt_fair_prob", "blended_prob", "edge",
                 "ev_per_dollar", "fair_price", "stake", "n_books", "n_cur", "new_team", "b2b",
-                "market_weight", "disagree", "suspicious"]
-    proj_cols = ["game", "player", "team", "opp", "home", "b2b", "minutes", "n_cur", "new_team",
-                 "mu_PTS", "mu_REB", "mu_AST", "mu_FG3M", "mu_PRA"]
+                "market_weight", "disagree", "suspicious", "dtd", "inj_status", "min_boost", "inj_note"]
+    proj_cols = ["game", "player", "team", "opp", "pos", "home", "b2b", "minutes", "min_boost", "n_cur", "new_team",
+                 "dtd", "inj_status", "inj_note", "mu_PTS", "mu_REB", "mu_AST", "mu_FG3M", "mu_PRA",
+                 "posdef_PTS", "posdef_REB", "posdef_AST", "posdef_FG3M"]
     knobs = pd.DataFrame({"setting": ["MARKET_WEIGHT", "MIN_EDGE", "MIN_BOOKS", "KELLY_FRACTION",
                                       "MAX_BET_PCT", "BANKROLL", "PRIOR_SHRINK_K", "OPP_ADJ_STRENGTH"],
                           "value": [config.MARKET_WEIGHT, config.MIN_EDGE, config.MIN_BOOKS,
@@ -132,6 +138,8 @@ def write_xlsx(path, bets, evald, proj, lines):
         proj[[c for c in proj_cols if c in proj.columns]].sort_values(["game", "mu_PTS"], ascending=[True, False]
                                                                        ).to_excel(xw, sheet_name="Projections", index=False)
         lines.to_excel(xw, sheet_name="Raw lines", index=False)
+        if inj is not None and not inj.empty:
+            inj.drop(columns=["player_key"]).to_excel(xw, sheet_name="Injuries", index=False)
         knobs.to_excel(xw, sheet_name="Settings", index=False)
         for ws in xw.book.worksheets:
             ws.freeze_panes = "A2"

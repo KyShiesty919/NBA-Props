@@ -19,7 +19,8 @@ from config import ODDS_API_KEY, ODDS_REGIONS, MARKETS, EXCLUDE_BOOKS, TEAM_ABBR
 
 API = "https://api.the-odds-api.com/v4"
 SPORT = "basketball_nba"
-LINES_DIR = DATA_DIR / "lines"
+import os
+LINES_DIR = DATA_DIR / os.getenv("LINES_SUBDIR", "lines")   # demo mode uses lines_demo
 LINES_DIR.mkdir(exist_ok=True)
 
 
