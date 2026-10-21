@@ -46,10 +46,12 @@ is still there as a manual override for late scratches the feed hasn't caught.
 3. **Injuries & usage** (`injuries.py`, `usage.py`) — players listed Out are removed. Each team's
    rotation is anchored to 240 minutes: if the available players' baseline minutes fall short, the
    deficit is handed out with a preference for the absent players' position group (capped at 36/player).
-   The absent players' share of team production is partly absorbed by teammates as a per-minute
-   rate bump (60% for PTS/AST/3PM, 35% for REB, stronger at the same position). Where a player has
-   8+ games both with and without a specific absent teammate, his observed with/without rate ratio
-   replaces the generic bump. Day-To-Day players are projected normally, flagged, and bet at half stake.
+   Only 40% of that deficit goes to the tracked rotation (the rest goes to end-of-bench guys with
+   no props). The absent players' share of team production is partly absorbed by teammates as a
+   per-minute rate bump (30% for PTS/AST/3PM, 17.5% for REB, stronger at the same position).
+   These numbers are calibrated, not guessed: `python backtest.py` replays last season's 900+
+   games with a rotation player out. Day-To-Day players are projected normally, flagged, and bet
+   at half stake.
 4. **Matchup** — opponent adjustment is half team-level (what they allow overall) and half
    position-level (what they allow to G / F / C), each vs league average and shrunk by games;
    applied at half strength. Opponent pace at half strength. +1.5% points at home. 3% minutes
@@ -78,12 +80,13 @@ is still there as a manual override for late scratches the feed hasn't caught.
 
 - The injury feed is ESPN's, which lags beat reporters by minutes to hours. Late scratches and
   "questionable" guys who get ruled out at 6:30pm will still slip through the morning run.
-- The usage model is a first pass. The generic bump (60% of missing production absorbed) is a
-  reasonable league-wide number, not a per-player one; the empirical with/without override only
-  kicks in for pairs with enough games together last season. It has not been validated against
-  results yet — watch the `inj_note` bets separately in the grading.
-- When a roster's baseline minutes already exceed 240 (most healthy teams), nobody is trimmed;
-  the market blend is doing that work instead.
+- The usage model is calibrated on last season's absences (`backtest.py`): unbiased on average,
+  and better than no adjustment on minutes. But it is a league-wide rule, and the players it boosts
+  most still come out ~0.9 PTS high on average — so treat big `min_boost` overs with some
+  suspicion. A per-player with/without override was tested and did nothing (MAE ±0.02), so it's off.
+- Minutes: EWMA of the last 10 games played was the best rule tested (MAE 4.6 min); a
+  per-team-game average (which would justify trimming deep rosters) was 4 minutes biased low.
+  So when a roster's baseline exceeds 240, nobody is trimmed; the market blend handles it.
 - Position groups are ESPN's listed position mapped to G / F / C, which is crude for guys like
   Sabonis (listed F) or point forwards.
 - Odds API credits: 5 markets × ~10 games × 2 snapshots ≈ 100/day; needs the 20k/month plan.

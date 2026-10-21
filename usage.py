@@ -26,12 +26,19 @@ import pandas as pd
 from config import PRIOR_SHRINK_K
 
 STATS = ["PTS", "REB", "AST", "FG3M"]
-ALPHA = {"PTS": 0.6, "AST": 0.6, "FG3M": 0.6, "REB": 0.35}   # how much missing production is absorbed via rate bumps
+# Calibrated on 2025-26 (backtest.py, 900 team-games with a rotation player out): these values
+# make teammate projections unbiased; the original 0.6/0.35 with a 100% minutes fill overprojected
+# teammates by ~1.8 PTS and was less accurate than no adjustment at all.
+ALPHA = {"PTS": 0.3, "AST": 0.3, "FG3M": 0.3, "REB": 0.175}
+USE_EMPIRICAL = False   # with/without override: backtest showed no measurable gain (MAE +/- 0.02); off
 SAME_POS_MIN_SHARE = 0.7
 MAX_MINUTES = 36.0
 TEAM_MINUTES = 240.0
 ROTATION_SIZE = 10
 GARBAGE_MIN = 4.0
+FILL_FRACTION = 0.4     # share of the minutes deficit handed to the tracked rotation; the rest goes to
+                        # end-of-bench guys who don't have props. Backtest: 1.0 overshot by ~2.5 min/player,
+                        # 0.4 is unbiased (+0.1) and beats no-fill on minutes MAE (4.79 vs 4.93).
 EMP_MIN_GAMES = 8
 EMP_SHRINK_K = 10
 
@@ -39,6 +46,8 @@ EMP_SHRINK_K = 10
 # ---------------------------------------------------------------- empirical with/without
 def with_without(logs: pd.DataFrame, pid: int, mate_id: int) -> dict | None:
     """Per-minute rate ratio (without mate / with mate) for player pid. None if too thin."""
+    if logs is None or logs.empty:
+        return None
     me = logs[(logs["PLAYER_ID"] == pid) & (logs["MIN"] > 0)]
     if me.empty:
         return None
@@ -97,7 +106,7 @@ def redistribute(team_rows: pd.DataFrame, out_rows: pd.DataFrame, logs: pd.DataF
         # benched real rotation players; the market blend handles over-deep rosters better.)
         pass
     else:                                      # deficit: fill with position preference
-        deficit = target - cur_sum
+        deficit = (target - cur_sum) * FILL_FRACTION
         out_pos_w = out_rows.groupby("pos_group")["minutes"].sum()
         out_pos_w = out_pos_w / out_pos_w.sum() if out_pos_w.sum() > 0 else out_pos_w
         pref = df["pos_group"].map(out_pos_w).fillna(0)          # share of missing minutes at my position
@@ -113,7 +122,8 @@ def redistribute(team_rows: pd.DataFrame, out_rows: pd.DataFrame, logs: pd.DataF
     for _, o in out_rows.iterrows():
         same = df["pos_group"] == o["pos_group"]
         # 2) rates (generic bump) with 3) empirical override per (player, out teammate) pair
-        ww = {r["player_id"]: with_without(logs, r["player_id"], o["player_id"]) for _, r in df.iterrows()}
+        ww = ({r["player_id"]: with_without(logs, r["player_id"], o["player_id"]) for _, r in df.iterrows()}
+              if USE_EMPIRICAL else {})
         for s in STATS:
             missing_share = (o["minutes"] * o[f"rate_{s}"]) / tot[s] if tot[s] > 0 else 0
             overlap = np.where(same, 1.0, 0.5)
