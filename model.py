@@ -19,7 +19,8 @@ from config import (PRIOR_SHRINK_K, TEAM_SHRINK_K, MIN_GAMES_TOTAL, MINUTES_LOOK
                     MINUTES_DECAY, MINUTES_PRIOR_K, MARKET_WEIGHT_EARLY, MARKET_WEIGHT_K,
                     MAX_DISAGREE, OPP_ADJ_STRENGTH, PACE_ADJ_STRENGTH, HOME_PTS_BUMP,
                     B2B_MINUTES_MULT, MARKET_WEIGHT, MIN_EDGE, MIN_BOOKS, BANKROLL,
-                    KELLY_FRACTION, MAX_BET_PCT, MAX_PLAYER_PCT, BETTABLE_BOOKS)
+                    KELLY_FRACTION, MAX_BET_PCT, MAX_PLAYER_PCT, BETTABLE_BOOKS, MIN_N_CUR,
+                    SKIP_USAGE_MODEL_BETS)
 from fetch_lines import norm_name, american_to_prob, prob_to_american
 
 STATS = ["PTS", "REB", "AST", "FG3M"]
@@ -263,6 +264,9 @@ def pick_bets(evald: pd.DataFrame) -> pd.DataFrame:
                & ~evald["suspicious"]]
     if BETTABLE_BOOKS:
         ok = ok[ok["book"].isin(BETTABLE_BOOKS)]
+    ok = ok[ok["n_cur"] >= MIN_N_CUR]
+    if SKIP_USAGE_MODEL_BETS and "inj_note" in ok.columns:
+        ok = ok[ok["inj_note"].fillna("").astype(str).str.len() == 0]
     # one bet per player/stat/side: the one with the best EV (handles alt lines across books)
     ok = ok.sort_values("ev_per_dollar", ascending=False).drop_duplicates(["player_key", "stat", "side"])
     # never both sides of the same player/stat

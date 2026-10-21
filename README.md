@@ -76,6 +76,32 @@ is still there as a manual override for late scratches the feed hasn't caught.
 - **By prop** — expect some prop types to be duds. Turn off the ones that don't calibrate by removing them from `MARKETS` rather than hoping they come around.
 - Under ~200 graded bets, ROI is noise. The z-score line will tell you.
 
+## What the backtest says (read this before trusting anything)
+
+`backtest_lines.py` replayed the production model against **real sportsbook prop lines** (The Odds
+API historical snapshots, ~2h before tip) on 35 game-days per season for 2023-24, 2024-25 and
+2025-26: 616k priced lines, 10,768 graded bets. `backtest_tune.py` re-simulates betting rules on
+that cache (fit on 2023-25, blind test on 2025-26).
+
+| Configuration | Fit 2023-25 | Blind 2025-26 |
+|---|---|---|
+| Original (market weight 0.35, edge 4%) | −2.1% ROI, z = −2.0 | −1.8% |
+| Market weight 0.75, edge 3% | −0.3% | −1.3% |
+| + no usage-model bets, 10+ games played **(current)** | +5.6% (930 bets) | +1.9% (247 bets, z = 0.3) |
+| Rebounds + threes only | +4.1% | 0.0% |
+
+Takeaways:
+- The raw model is **less** accurate than the market (Brier 0.248 vs 0.244). Blended with the
+  market it is slightly **more** accurate (0.241), so it carries information — just not much.
+- The original settings were overconfident by 5–11 points in every probability bucket. Actual hit
+  rates landed ~1 point above the market's fair price: a real edge, smaller than the vig.
+- The first 5 games of a season ran −28%. Points and PRA lost; rebounds and threes won in-sample
+  but not out-of-sample. Usage-model bets lost (−3.2%) vs +0.7% without.
+- **Nothing tested is profitable with statistical confidence.** Current settings are best described
+  as "probably break-even, maybe slightly positive, ~250–450 bets a season".
+- The backtest is against near-closing lines. Morning lines are softer; live CLV tracking in
+  `grade.py` is the only thing that can show whether that helps.
+
 ## Known gaps (things that would make it better)
 
 - The injury feed is ESPN's, which lags beat reporters by minutes to hours. Late scratches and

@@ -56,12 +56,22 @@ B2B_MINUTES_MULT = 0.97   # minutes haircut on 2nd night of back-to-back
 # Final prob = MARKET_WEIGHT * market_fair + (1 - MARKET_WEIGHT) * model.
 # The market is sharp; a raw model that ignores it will overbet. Start here,
 # and move toward 0 ONLY once grading shows the raw model beats the closing line.
-MARKET_WEIGHT = 0.35      # floor, reached once a player has ~15 games this season
-MARKET_WEIGHT_EARLY = 0.70  # used when a player has 0 games this season; decays toward MARKET_WEIGHT
+# Backtest (backtest_lines.py / backtest_tune.py, 10,768 real-line bets over 2023-26, lines ~2h pre-tip):
+#   mw 0.35 / edge 0.04 (original):            -2.1% ROI, z = -2.1  (a loser, with confidence)
+#   mw 0.75 / edge 0.03:                        -0.3% fit, -1.3% blind test
+#   + no usage-model bets + 10 games played:    +5.6% fit, +1.9% blind test (247 bets, not significant)
+# Nothing tested is profitable with statistical confidence. These settings are "probably ~break-even,
+# maybe slightly positive". Live CLV tracking is the only thing that can upgrade that verdict.
+MARKET_WEIGHT = 0.75      # floor, reached once a player has ~15 games this season
+MARKET_WEIGHT_EARLY = 0.85  # used when a player has 0 games this season; decays toward MARKET_WEIGHT
 MARKET_WEIGHT_K = 6         # weight = floor + (early - floor) * K / (K + n_cur)
+MIN_N_CUR = 10            # no bets on a player until he has this many games this season
+                          #   (first 5 games ran -28% in the backtest; 5-15 was +1.4%)
+SKIP_USAGE_MODEL_BETS = True  # don't bet players whose projection was touched by a teammate being out
+                              #   (those bets ran -3.2% vs +0.7% for the rest). OUT players are still removed.
 MAX_DISAGREE = 0.30       # skip (flag) a bet when |projection - line| / line exceeds this: the
                           # market almost certainly knows something (role change, injury) the model doesn't
-MIN_EDGE = 0.04           # blended prob - market fair prob, must exceed this to bet
+MIN_EDGE = 0.03           # blended prob - market fair prob, must exceed this to bet
 MIN_BOOKS = 2             # need this many books quoting a prop to trust consensus
 BANKROLL = 1000.0
 KELLY_FRACTION = 0.25

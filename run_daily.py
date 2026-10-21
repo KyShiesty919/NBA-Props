@@ -105,9 +105,16 @@ def main():
         append_ledger(bets, today)
         print(f"Appended {len(bets)} picks to {LEDGER}")
 
+    cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake", "n_cur"]
     if not bets.empty:
-        cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake"]
         print("\nTOP BETS\n" + bets[cols].head(15).to_string(index=False))
+    else:
+        watch = evald[(evald["edge"] >= config.MIN_EDGE) & (~evald["suspicious"])
+                      & (evald["book"].isin(config.BETTABLE_BOOKS) if config.BETTABLE_BOOKS else True)
+                      ].sort_values("edge", ascending=False)
+        watch = watch.drop_duplicates(["player_key", "stat"]).head(10)
+        print(f"\nNO BETS qualify (need {config.MIN_N_CUR}+ games this season, no usage-model involvement). "
+              f"Watchlist of what the model likes anyway — NOT recommendations:\n" + watch[cols].to_string(index=False))
 
 
 def report_changes(bets: pd.DataFrame, today: date):
