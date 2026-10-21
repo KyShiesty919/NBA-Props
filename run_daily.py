@@ -31,7 +31,7 @@ from model import blend_team_stats, build_projections, evaluate, pick_bets
 
 LEDGER_COLS = ["date", "game", "player_id", "player", "player_key", "team", "opp", "stat", "side",
                "line", "book", "price", "projection", "model_prob", "mkt_fair_prob", "blended_prob",
-               "edge", "ev_per_dollar", "stake", "n_cur", "dtd", "inj_note", "event_id", "fetched_utc",
+               "edge", "ev_per_dollar", "stake", "n_cur", "dtd", "inj_note", "tier", "abs_spread", "event_id", "fetched_utc",
                "actual", "result", "close_price", "close_fair_prob", "clv", "profit"]
 
 
@@ -107,13 +107,16 @@ def main():
 
     cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake", "n_cur"]
     if not bets.empty:
-        print("\nTOP BETS\n" + bets[cols].head(15).to_string(index=False))
+        print("\nTOP BETS (tier: blowout = under in a 10+ pt spread game, the strongest angle in the backtest; "
+              "core = under, 10+ games, no injury-driven projection)\n"
+              + bets[["tier", "abs_spread"] + cols].head(20).to_string(index=False))
     else:
         watch = evald[(evald["edge"] >= config.MIN_EDGE) & (~evald["suspicious"])
                       & (evald["book"].isin(config.BETTABLE_BOOKS) if config.BETTABLE_BOOKS else True)
                       ].sort_values("edge", ascending=False)
         watch = watch.drop_duplicates(["player_key", "stat"]).head(10)
-        print(f"\nNO BETS qualify (need {config.MIN_N_CUR}+ games this season, no usage-model involvement). "
+        print(f"\nNO BETS qualify (unders only; core tier needs {config.MIN_N_CUR}+ games and no usage-model involvement, "
+              f"blowout tier needs a {config.BLOWOUT_SPREAD:.0f}+ pt spread and {config.BLOWOUT_MIN_N_CUR}+ games). "
               f"Watchlist of what the model likes anyway — NOT recommendations:\n" + watch[cols].to_string(index=False))
 
 
@@ -159,7 +162,7 @@ def append_ledger(bets: pd.DataFrame, today: date):
 
 
 def write_xlsx(path, bets, evald, proj, lines, inj=None):
-    bet_cols = ["game", "player", "team", "opp", "stat", "side", "line", "book", "price",
+    bet_cols = ["tier", "abs_spread", "game", "player", "team", "opp", "stat", "side", "line", "book", "price",
                 "projection", "minutes", "model_prob", "mkt_fair_prob", "blended_prob", "edge",
                 "ev_per_dollar", "fair_price", "stake", "n_books", "n_cur", "new_team", "b2b",
                 "market_weight", "disagree", "suspicious", "dtd", "inj_status", "min_boost", "inj_note"]

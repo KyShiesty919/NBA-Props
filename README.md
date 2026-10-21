@@ -32,7 +32,7 @@ is still there as a manual override for late scratches the feed hasn't caught.
 
 | Sheet | What |
 |---|---|
-| **Bets** | What clears the edge bar — one bet per player/stat, best price across books, stake sized at quarter-Kelly and capped at 3% of bankroll |
+| **Bets** | What clears the bar — unders only, `tier` = blowout (10+ pt spread) or core; one bet per player/stat, best price across books, quarter-Kelly stake capped at 3% of bankroll |
 | **All lines** | Every book/line/side the model priced, with model prob, market fair prob, blended prob, edge, EV |
 | **Projections** | Raw means per player (minutes, PTS, REB, AST, 3PM, PRA) |
 | **Raw lines** | Exactly what the Odds API returned |
@@ -89,6 +89,20 @@ that cache (fit on 2023-25, blind test on 2025-26).
 | Market weight 0.75, edge 3% | −0.3% | −1.3% |
 | + no usage-model bets, 10+ games played **(current)** | +5.6% (930 bets) | +1.9% (247 bets, z = 0.3) |
 | Rebounds + threes only | +4.1% | 0.0% |
+
+Second round (`backtest_angles.py`, spreads + morning + alt-line snapshots, blind-tested on 2025-26):
+
+| Angle | Fit 2023-25 | Blind 2025-26 | Verdict |
+|---|---|---|---|
+| **Unders in 10+ pt spread games** (mw .75, edge 3%, 5+ games) | +14.9% (199) | **+20.9% (190), z = 2.9** | Live. Starters sit in blowouts. |
+| Unders only, core settings | +8.8% (494) | +8.3% (150) | Live. Overs lost in every cut. |
+| Morning lines: CLV of model leans | — | +0.6 pts, 56–59% move toward model | Bet in the morning. |
+| Back-to-back unders | +5.4% | −3.4% | Didn't hold. |
+| Alt points ladders | — | −40% | Longshot bias. Not offered. |
+| Double-doubles | — | −26% | Same. |
+
+So production bets **unders only**, in two tiers: `core` (10+ games, no usage-model involvement)
+and `blowout` (10+ point spread, 5+ games). Expect ~250 core and ~200 blowout bets a season.
 
 Takeaways:
 - The raw model is **less** accurate than the market (Brier 0.248 vs 0.244). Blended with the

@@ -65,7 +65,16 @@ B2B_MINUTES_MULT = 0.97   # minutes haircut on 2nd night of back-to-back
 MARKET_WEIGHT = 0.75      # floor, reached once a player has ~15 games this season
 MARKET_WEIGHT_EARLY = 0.85  # used when a player has 0 games this season; decays toward MARKET_WEIGHT
 MARKET_WEIGHT_K = 6         # weight = floor + (early - floor) * K / (K + n_cur)
-MIN_N_CUR = 10            # no bets on a player until he has this many games this season
+# Second round of backtesting (backtest_angles.py, blind-tested on 2025-26):
+#   * OVERS lost in every cut (-3.5% overall). Unders only at these settings: +8.8% fit / +8.3% blind.
+#   * UNDERS IN GAMES WITH A 10+ POINT SPREAD: 389 bets, 58.6% hit, +17.8% ROI, z = 3.5, held on both
+#     samples and monotonic in spread. Starters sit in blowouts; props don't fully price it.
+#   * Morning lines closed toward the model's side 56-59% of the time (+0.6 pts avg CLV): bet mornings.
+#   * Alt lines and double-doubles: -25% to -40% (longshot bias). Not offered.
+BET_SIDES = {"under"}     # overs are off the board
+BLOWOUT_SPREAD = 10.0     # |spread| at or above this = "blowout" tier
+BLOWOUT_MIN_N_CUR = 5     # blowout-tier unders need this many games this season (usage-model bets allowed)
+MIN_N_CUR = 10            # core tier: no bets on a player until he has this many games this season
                           #   (first 5 games ran -28% in the backtest; 5-15 was +1.4%)
 SKIP_USAGE_MODEL_BETS = True  # don't bet players whose projection was touched by a teammate being out
                               #   (those bets ran -3.2% vs +0.7% for the rest). OUT players are still removed.

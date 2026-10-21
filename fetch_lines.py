@@ -12,6 +12,7 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import requests
 
@@ -54,7 +55,7 @@ def fetch_event_props(event_id: str) -> dict:
     r = requests.get(
         f"{API}/sports/{SPORT}/events/{event_id}/odds",
         params={"apiKey": ODDS_API_KEY, "regions": ODDS_REGIONS,
-                "markets": ",".join(MARKETS), "oddsFormat": "american"},
+                "markets": ",".join(list(MARKETS) + ["spreads"]), "oddsFormat": "american"},
         timeout=30,
     )
     r.raise_for_status()
@@ -104,6 +105,10 @@ def flatten(raw: list, fetched: datetime) -> pd.DataFrame:
         ev, odds = item["event"], item["odds"]
         home, away = ev["home_team"], ev["away_team"]
         h, a = TEAM_ABBR.get(home, home[:3].upper()), TEAM_ABBR.get(away, away[:3].upper())
+        # game spread (median |spread| across books) -> blowout tier
+        spreads = [abs(float(o["point"])) for bk in odds.get("bookmakers", []) for m in bk.get("markets", [])
+                   if m["key"] == "spreads" for o in m.get("outcomes", []) if o.get("point") is not None]
+        abs_spread = float(np.median(spreads)) if spreads else np.nan
         for bk in odds.get("bookmakers", []):
             if bk["key"] in EXCLUDE_BOOKS:
                 continue
@@ -118,6 +123,7 @@ def flatten(raw: list, fetched: datetime) -> pd.DataFrame:
                         "player": o.get("description", ""), "player_key": norm_name(o.get("description", "")),
                         "side": o["name"].lower(), "line": float(o["point"]), "price": int(o["price"]),
                         "implied": american_to_prob(o["price"]), "fetched_utc": fetched.isoformat(),
+                        "abs_spread": abs_spread,
                     })
     return pd.DataFrame(rows)
 
