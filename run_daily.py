@@ -6,6 +6,8 @@ Daily driver.
     python run_daily.py --demo       # synthetic data, no network — pipeline test
     python run_daily.py --no-ledger  # don't append tonight's picks to the ledger
     python run_daily.py --reuse-lines # re-run the model on today's already-saved lines (no API credits)
+    python run_daily.py --rescore    # afternoon: re-pull injuries, re-score against the morning lines,
+                                     #   write outputs/YYYY-MM-DD_props_HHMM.xlsx and print what changed
 
 Typical day:
    morning:   python run_daily.py          -> bet from the "Bets" sheet
@@ -36,6 +38,9 @@ LEDGER_COLS = ["date", "game", "player_id", "player", "player_key", "team", "opp
 def main():
     args = set(sys.argv[1:])
     demo = "--demo" in args
+    rescore = "--rescore" in args
+    if rescore:
+        args.add("--reuse-lines")
     today = date.today()
 
     if "--close" in args and not demo:
@@ -85,7 +90,11 @@ def main():
     print(f"{len(evald)} priced lines evaluated, {len(bets)} clear the {config.MIN_EDGE:.0%} edge bar.")
 
     # ---- outputs -----------------------------------------------------------
-    out = OUT_DIR / f"{today.isoformat()}_props{'_demo' if demo else ''}.xlsx"
+    from datetime import datetime
+    suffix = "_demo" if demo else (f"_{datetime.now().strftime('%H%M')}" if rescore else "")
+    out = OUT_DIR / f"{today.isoformat()}_props{suffix}.xlsx"
+    if rescore:
+        report_changes(bets, today)
     write_xlsx(out, bets, evald, proj, lines, inj)
     print(f"Wrote {out}")
 
@@ -99,6 +108,30 @@ def main():
     if not bets.empty:
         cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake"]
         print("\nTOP BETS\n" + bets[cols].head(15).to_string(index=False))
+
+
+def report_changes(bets: pd.DataFrame, today: date):
+    """Compare tonight's new board with the most recent board written today."""
+    prev_files = sorted(p for p in OUT_DIR.glob(f"{today.isoformat()}_props*.xlsx") if "demo" not in p.name)
+    if not prev_files:
+        return
+    prev = pd.read_excel(prev_files[-1], "Bets")
+    key = ["player", "stat", "side"]
+    old = prev[key].apply(tuple, axis=1).tolist() if not prev.empty else []
+    new = bets[key].apply(tuple, axis=1).tolist() if not bets.empty else []
+    dropped = [k for k in old if k not in new]
+    added = [k for k in new if k not in old]
+    print(f"\nRESCORE vs {prev_files[-1].name}: {len(added)} bets added, {len(dropped)} dropped, "
+          f"{len(set(old) & set(new))} unchanged.")
+    if dropped:
+        print("DROPPED (player scratched, teammate news, or edge gone):")
+        for k in dropped[:25]:
+            print("   -", *k)
+    if added:
+        print("ADDED:")
+        for k in added[:25]:
+            r = bets[(bets["player"] == k[0]) & (bets["stat"] == k[1]) & (bets["side"] == k[2])].iloc[0]
+            print(f"   + {k[0]} {k[1]} {k[2]} {r['line']} @ {r['book']} {r['price']:+d} (edge {r['edge']:.1%}) {r.get('inj_note', '')}")
 
 
 def append_ledger(bets: pd.DataFrame, today: date):

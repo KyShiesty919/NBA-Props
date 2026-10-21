@@ -18,6 +18,7 @@ Edit `config.py` → `SEASON` / `PRIOR_SEASON` if needed, and `BANKROLL`.
 
 ```
 python run_daily.py          # morning: pulls data, projects, writes outputs/YYYY-MM-DD_props.xlsx
+python run_daily.py --rescore # 4:30pm & 5:30pm: re-pull injuries, re-score vs morning lines, print what changed (free)
 python run_daily.py --close  # run hourly from noon to 10pm: grabs each game once, within 75 min of its tip (needed for CLV)
 python grade.py              # next morning: grades yesterday, prints + writes performance_report.xlsx
 ```
