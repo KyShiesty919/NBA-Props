@@ -39,7 +39,7 @@ API = "https://api.the-odds-api.com/v4/historical/sports/basketball_nba"
 HIST = config.DATA_DIR / "hist_lines"
 HIST.mkdir(exist_ok=True)
 PRIOR = {"2023-24": "2022-23", "2024-25": "2023-24", "2025-26": "2024-25"}
-SEASON_END = {"2023-24": date(2024, 4, 14), "2024-25": date(2025, 4, 13), "2025-26": date(2026, 4, 12)}
+SEASON_END = {"2022-23": date(2023, 4, 9), "2023-24": date(2024, 4, 14), "2024-25": date(2025, 4, 13), "2025-26": date(2026, 4, 12)}
 ET = -5  # hours; close enough for choosing dates (DST ignored on purpose)
 
 
@@ -157,13 +157,14 @@ def run_day(season, d, cur_all, prior_all, t_prior, ros, abbr_to_id, pos_map):
     evald = evaluate(proj, lines)
     bets = pick_bets(evald)
     # grade
-    actual = cur_all[cur_all["GAME_DATE"] == before].set_index("PLAYER_ID")
+    act = cur_all[cur_all["GAME_DATE"] == before].drop_duplicates(["PLAYER_ID", "OPP"]).set_index(["PLAYER_ID", "OPP"])
     for df in (evald, bets):
         if df.empty:
             continue
         df["date"] = d.isoformat()
         df["season"] = season
-        df["actual"] = [float(actual.loc[p, s]) if p in actual.index else np.nan for p, s in zip(df["player_id"], df["stat"])]
+        df["actual"] = [float(act.loc[(p, o), s]) if (p, o) in act.index else np.nan
+                        for p, o, s in zip(df["player_id"], df["opp"], df["stat"])]
         won = np.where(df["side"] == "over", df["actual"] > df["line"], df["actual"] < df["line"])
         push = df["actual"] == df["line"]
         df["result"] = np.where(df["actual"].isna(), "void", np.where(push, "push", np.where(won, "win", "loss")))

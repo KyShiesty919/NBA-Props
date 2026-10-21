@@ -83,6 +83,15 @@ def rosters(force=False) -> pd.DataFrame:
 
 
 # ------------------------------------------------------------------ player game logs
+def _et_date(iso: str) -> str:
+    try:
+        from datetime import datetime as _dt
+        t = _dt.fromisoformat(iso.replace("Z", "+00:00"))
+        return (t - timedelta(hours=5)).date().isoformat()
+    except Exception:  # noqa: BLE001
+        return iso[:10]
+
+
 def _parse_gamelog(pid, name, js, season) -> list:
     if not js or "seasonTypes" not in js:
         return []
@@ -104,7 +113,8 @@ def _parse_gamelog(pid, name, js, season) -> list:
                     rows.append({
                         "PLAYER_ID": pid, "PLAYER_NAME": name,
                         "TEAM_ABBREVIATION": std(meta.get("team", {}).get("abbreviation", "")),
-                        "GAME_ID": ev["eventId"], "GAME_DATE": meta.get("gameDate", "")[:10],
+                        # ESPN stamps UTC; shift 5h so a 10:30pm ET tip lands on the ET calendar day
+                        "GAME_ID": ev["eventId"], "GAME_DATE": _et_date(meta.get("gameDate", "")),
                         "HOME": meta.get("atVs") == "vs",
                         "OPP": std(meta.get("opponent", {}).get("abbreviation", "")),
                         "MIN": float(s[idx["minutes"]]), "PTS": int(s[idx["points"]]),
