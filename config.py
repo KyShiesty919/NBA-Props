@@ -1,0 +1,99 @@
+"""
+NBA Prop Model — configuration.
+Edit these; nothing else in the package needs touching for day-to-day use.
+"""
+import os
+from pathlib import Path
+
+# load .env if present
+_env = Path(__file__).resolve().parent / ".env"
+if _env.exists():
+    for _l in _env.read_text().splitlines():
+        if "=" in _l and not _l.startswith("#"):
+            _k, _v = _l.split("=", 1); os.environ.setdefault(_k.strip(), _v.strip())
+
+ROOT = Path(__file__).resolve().parent
+DATA_DIR = ROOT / "data"
+OUT_DIR = ROOT / "outputs"
+LEDGER = DATA_DIR / "picks_ledger.csv"
+
+# ---- Seasons --------------------------------------------------------------
+SEASON = "2026-27"          # current season, stats.nba.com format
+PRIOR_SEASON = "2025-26"    # used to shrink early-season noise
+
+# ---- Lines source ---------------------------------------------------------
+# https://the-odds-api.com  (export ODDS_API_KEY=... or put it in .env)
+ODDS_API_KEY = os.getenv("ODDS_API_KEY", "")
+ODDS_REGIONS = "us"
+# Odds API market key -> internal stat key
+MARKETS = {
+    "player_points": "PTS",
+    "player_rebounds": "REB",
+    "player_assists": "AST",
+    "player_threes": "FG3M",
+    "player_points_rebounds_assists": "PRA",
+}
+# Books to ignore entirely (DFS pick'em sites etc.)
+EXCLUDE_BOOKS = {"prizepicks", "underdog", "betr_picks", "sleeper"}
+# Books you can actually bet at. All books still feed the market consensus; only these
+# are eligible for the Bets sheet. None = any book. NC-licensed books by default.
+BETTABLE_BOOKS = {"draftkings", "fanduel", "betmgm", "williamhill_us", "espnbet", "fanatics", "bet365", "betrivers"}
+
+# ---- Model knobs ----------------------------------------------------------
+PRIOR_SHRINK_K = 15       # games: w_current = n / (n + K) when blending seasons
+TEAM_SHRINK_K = 10        # same idea for team pace / defense
+MIN_GAMES_TOTAL = 8       # skip players with fewer logged games across both seasons
+MINUTES_LOOKBACK = 10     # games used for minutes projection
+MINUTES_DECAY = 0.85      # exponential weight per game back
+MINUTES_PRIOR_K = 5       # early season: blend recent minutes with last season's full-season avg
+                          # w_recent = n_cur / (n_cur + K); last-10-of-last-April is garbage (rest/tank)
+OPP_ADJ_STRENGTH = 0.5    # 0 = ignore opponent, 1 = full opponent effect
+PACE_ADJ_STRENGTH = 0.5
+HOME_PTS_BUMP = 0.015     # +1.5% points at home (small, well-documented)
+B2B_MINUTES_MULT = 0.97   # minutes haircut on 2nd night of back-to-back
+
+# ---- Betting knobs ----------------------------------------------------------
+# Final prob = MARKET_WEIGHT * market_fair + (1 - MARKET_WEIGHT) * model.
+# The market is sharp; a raw model that ignores it will overbet. Start here,
+# and move toward 0 ONLY once grading shows the raw model beats the closing line.
+MARKET_WEIGHT = 0.35      # floor, reached once a player has ~15 games this season
+MARKET_WEIGHT_EARLY = 0.70  # used when a player has 0 games this season; decays toward MARKET_WEIGHT
+MARKET_WEIGHT_K = 6         # weight = floor + (early - floor) * K / (K + n_cur)
+MAX_DISAGREE = 0.30       # skip (flag) a bet when |projection - line| / line exceeds this: the
+                          # market almost certainly knows something (role change, injury) the model doesn't
+MIN_EDGE = 0.04           # blended prob - market fair prob, must exceed this to bet
+MIN_BOOKS = 2             # need this many books quoting a prop to trust consensus
+BANKROLL = 1000.0
+KELLY_FRACTION = 0.25
+MAX_BET_PCT = 0.03        # hard cap per bet as fraction of bankroll
+MAX_PLAYER_PCT = 0.05     # hard cap total exposure on one player per slate
+
+# ---- stats.nba.com request headers (required or you get 403/timeout) --------
+NBA_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+    "Referer": "https://www.nba.com/",
+    "Origin": "https://www.nba.com",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "x-nba-stats-origin": "stats",
+    "x-nba-stats-token": "true",
+    "Connection": "keep-alive",
+}
+
+TEAM_ABBR = {
+    "Atlanta Hawks": "ATL", "Boston Celtics": "BOS", "Brooklyn Nets": "BKN",
+    "Charlotte Hornets": "CHA", "Chicago Bulls": "CHI", "Cleveland Cavaliers": "CLE",
+    "Dallas Mavericks": "DAL", "Denver Nuggets": "DEN", "Detroit Pistons": "DET",
+    "Golden State Warriors": "GSW", "Houston Rockets": "HOU", "Indiana Pacers": "IND",
+    "Los Angeles Clippers": "LAC", "LA Clippers": "LAC", "Los Angeles Lakers": "LAL",
+    "Memphis Grizzlies": "MEM", "Miami Heat": "MIA", "Milwaukee Bucks": "MIL",
+    "Minnesota Timberwolves": "MIN", "New Orleans Pelicans": "NOP", "New York Knicks": "NYK",
+    "Oklahoma City Thunder": "OKC", "Orlando Magic": "ORL", "Philadelphia 76ers": "PHI",
+    "Phoenix Suns": "PHX", "Portland Trail Blazers": "POR", "Sacramento Kings": "SAC",
+    "San Antonio Spurs": "SAS", "Toronto Raptors": "TOR", "Utah Jazz": "UTA",
+    "Washington Wizards": "WAS",
+}
+
+for d in (DATA_DIR, OUT_DIR):
+    d.mkdir(parents=True, exist_ok=True)
