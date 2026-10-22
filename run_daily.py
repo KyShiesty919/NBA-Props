@@ -98,11 +98,12 @@ def main():
     write_xlsx(out, bets, evald, proj, lines, inj)
     print(f"Wrote {out}")
 
-    if "--no-ledger" not in args and not bets.empty:
-        if LEDGER.exists():   # re-run same day: replace today's picks
+    if "--no-ledger" not in args:
+        if LEDGER.exists():   # re-run same day: replace today's picks (even with an empty board)
             old = pd.read_csv(LEDGER)
             old[old["date"] != today.isoformat()].to_csv(LEDGER, index=False)
-        append_ledger(bets, today)
+        if not bets.empty:
+            append_ledger(bets, today)
         print(f"Appended {len(bets)} picks to {LEDGER}")
 
     cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake", "n_cur"]
