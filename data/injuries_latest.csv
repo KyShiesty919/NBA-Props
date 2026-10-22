@@ -23,7 +23,6 @@ Julian Strawther,julian strawther,DEN,G,Out,True,False,2026-11-29,"Strawther (kn
 Taurean Prince,taurean prince,DET,F,Day-To-Day,False,True,2026-10-23,Prince (personal) is out for Tuesday's game against the Celtics.,2026-10-21
 Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2026-12-01,Porzingis is contemplating his future in basketball as he deals with recurring symptoms from the autoimmune condition termed as postural orthostatic tachycardia,2026-10-21
 Charles Bassey,charles bassey,GSW,C,Out,True,False,2026-10-23,Bassey (knee) is out for Wednesday's season opener versus the Lakers.,2026-10-21
-Stephen Curry,stephen curry,GSW,G,Day-To-Day,False,True,2026-10-21,Curry (ankle) is listed as probable for Wednesday's game against the Lakers.,2026-10-21
 Brandin Podziemski,brandin podziemski,GSW,G,Out,True,False,2026-10-23,Podziemski (back) has been ruled out for Wednesday's game against the Lakers.,2026-10-21
 Moses Moody,moses moody,GSW,G,Out,True,False,2026-12-01,"Moody (knee) is progressing toward a potential return between December and January after rupturing his left patellar tendon in March, Anthony Slater of ESPN rep",2026-10-21
 Jimmy Butler III,jimmy butler,GSW,F,Out,True,False,2027-01-02,"Butler (knee) could return sometime between January and February as he continues recovering from a torn right ACL, Anthony Slater of ESPN reports.",2026-10-21
@@ -36,9 +35,9 @@ Max Strus,max strus,LAC,G,Out,True,False,2026-11-08,"Strus has been diagnosed wi
 Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-08,"Niederhauser (foot) won't be ready for the start of the season, Law Murray of The Athletic reports.",2026-10-21
 Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-08,"Ingram won't be ready for the start of the season due to a partially torn Achilles, per Joey Linn of SI.com.",2026-10-21
 Jordan Miller,jordan miller,LAC,G,Out,True,False,2027-03-02,"Miller underwent surgery Wednesday to repair a torn left rotator cuff and will be re-evaluated in six months, per Law Murray of The Athletic.",2026-10-21
-Collin Sexton,collin sexton,LAL,G,Out,True,False,2026-10-23,"Sexton (calf) won't play in Wednesday's regular-season opener against the Warriors, per Khobi Price of The California Post.",2026-10-21
-Cameron Carr,cameron carr,LAL,G,Out,True,False,2026-10-23,Carr (oblique) is listed as out for Wednesday's game against the Warriors.,2026-10-21
-Adou Thiero,adou thiero,LAL,F,Out,True,False,2026-10-23,Thiero (knee) has been ruled out for Wednesday's game against Golden State.,2026-10-21
+Adou Thiero,adou thiero,LAL,F,Out,True,False,2026-10-23,"Head coach JJ Redick said Thiero (knee), who is out for Wednesday's game against Golden State, will begin ramping up soon and can be considered day-to-day movin",2026-10-21
+Collin Sexton,collin sexton,LAL,G,Out,True,False,2026-10-23,"Head coach JJ Redick said that Sexton (calf) did not experience a setback, but the Lakers will sit him out of Wednesday's regular-season opener against the Warr",2026-10-21
+Cameron Carr,cameron carr,LAL,G,Out,True,False,2026-10-23,"Head coach JJ Redick said Carr (oblique), who is out for Wednesday's game against Golden State, is ""ramping up"" and can be considered day-to-day moving forward,",2026-10-21
 Isaiah Stewart,isaiah stewart,MEM,C,Out,True,False,2026-10-23,Stewart (ankle) has been ruled out for Wednesday's game against the Jazz.,2026-10-21
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-10-21
 Nikola Topic,nikola topic,OKC,G,Out,True,False,2026-10-26,Topic (back) won't play in Thursday's game against the Nuggets.,2026-10-21
@@ -52,15 +51,15 @@ Tacko Fall,tacko fall,PHI,C,Out,True,False,2026-10-24,Fall (quadriceps) is out f
 Dean Wade,dean wade,PHI,F,Day-To-Day,False,True,2026-10-22,Wade (ankle) is questionable for Thursday's game against Cleveland.,2026-10-21
 Dominick Barlow,dominick barlow,PHI,F,Out,True,False,2026-11-02,"Barlow will miss at least the next two weeks of action due to a lumbar spine bone stress response, Adam Aaronson of PhillyVoice.com reports.",2026-10-21
 Ariel Hukporti,ariel hukporti,PHI,C,Out,True,False,2027-10-01,"Hukporti has sustained a season-ending ruptured right Achilles tendon, per Shams Charania of ESPN.",2026-10-21
-Luke Kennard,luke kennard,PHX,G,Day-To-Day,False,True,2026-10-21,Kennard (knee) is listed as questionable for Wednesday's game against Portland.,2026-10-21
+Luke Kennard,luke kennard,PHX,G,Out,True,False,2026-10-24,"Kennard (knee) won't play Wednesday versus Portland, Duane Rankin of The Arizona Republic reports.",2026-10-21
 Mark Williams,mark williams,PHX,C,Out,True,False,2027-02-03,"Williams underwent surgery Thursday to repair a torn labrum in his left shoulder and will miss an extended period of time, Shams Charania of ESPN reports.",2026-10-21
 Micah Potter,micah potter,POR,C,Day-To-Day,False,True,2026-10-21,Potter (illness) has been upgraded to probable for Wednesday's game against the Suns.,2026-10-21
 Branden Carlson,branden carlson,POR,C,Out,True,False,2026-10-23,Carlson (concussion) has been ruled out for Wednesday's game against the Suns.,2026-10-21
 Chris Youngblood,chris youngblood,POR,G,Out,True,False,2026-10-23,Youngblood is out for Wednesday's regular-season opener against Phoenix due to left ankle soreness.,2026-10-21
 Deni Avdija,deni avdija,POR,F,Day-To-Day,False,True,2026-10-21,Avdija is questionable for Wednesday's game against the Suns due to right ankle soreness.,2026-10-21
 Shaedon Sharpe,shaedon sharpe,POR,G,Out,True,False,2027-03-02,"Sharpe suffered a torn meniscus in his knee and is expected to miss six months, per Shams Charania of ESPN.",2026-10-21
+Malik Monk,malik monk,SAC,G,Day-To-Day,False,True,2026-10-21,Monk (ankle) has been downgraded to doubtful for Wednesday's game against the Clippers.,2026-10-21
 Ben Simmons,ben simmons,SAC,G,Out,True,False,2027-10-01,"Simmons underwent successful surgery Tuesday to repair a torn right Achilles tendon, James Ham of ESPN 1320 Sacramento reports.",2026-10-21
-Malik Monk,malik monk,SAC,G,Day-To-Day,False,True,2026-10-21,Monk (ankle) is listed as questionable for Wednesday's game against the Clippers.,2026-10-21
 Dylan Cardwell,dylan cardwell,SAC,C,Out,True,False,2026-11-02,"Cardwell (calf) is expected to miss at least the first five or six games of the regular season, with a longer absence possible, Frankie Cartoscelli of KHTK Sact",2026-10-21
 Maxime Raynaud,maxime raynaud,SAC,C,Out,True,False,2026-11-02,"Raynaud (knee) is expected to miss at least the first five or six games of the regular season, and potentially longer, Frankie Cartoscelli of KHTK Sactown Sport",2026-10-21
 Tobias Harris,tobias harris,SAS,F,Day-To-Day,False,True,2026-10-23,"Harris (calf) will not be ready for the season opener Wednesday against the Thunder, Matt Guzman of SI.com reports.",2026-10-21
