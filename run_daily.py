@@ -110,16 +110,16 @@ def main():
     if not bets.empty:
         print("\nTOP BETS (tier: blowout = under in a 10+ pt spread game, the strongest angle in the backtest; "
               "core = under, 10+ games, no injury-driven projection; over (experimental) = close game, model 5%+ "
-              "above the line, opponent allows above average — half stakes, weak evidence)\n"
+              "above the line, opponent allows above average — half stakes, weak evidence; (early) = player has 2-4 games, half stakes)\n"
               + bets[["tier", "abs_spread"] + cols].head(20).to_string(index=False))
     else:
         watch = evald[(evald["edge"] >= config.MIN_EDGE) & (~evald["suspicious"])
                       & (evald["book"].isin(config.BETTABLE_BOOKS) if config.BETTABLE_BOOKS else True)
                       ].sort_values("edge", ascending=False)
         watch = watch.drop_duplicates(["player_key", "stat"]).head(10)
-        print(f"\nNO BETS qualify (core tier needs {config.MIN_N_CUR}+ games and no usage-model involvement, "
-              f"blowout tier needs a {config.BLOWOUT_SPREAD:.0f}+ pt spread and {config.BLOWOUT_MIN_N_CUR}+ games; "
-              f"experimental over tier needs a close game, projection 5%+ over the line, a soft opponent, and {config.BLOWOUT_MIN_N_CUR}+ games). "
+        print(f"\nNO BETS qualify (every tier needs {config.EARLY_MIN_N_CUR}+ games this season; core tier = under with no usage-model involvement, "
+              f"blowout tier = under in a {config.BLOWOUT_SPREAD:.0f}+ pt spread game; "
+              f"experimental over tier = close game, projection 5%+ over the line, soft opponent). "
               f"Watchlist of what the model likes anyway — NOT recommendations:\n" + watch[cols].to_string(index=False))
 
 

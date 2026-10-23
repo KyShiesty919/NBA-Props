@@ -91,9 +91,15 @@ OVER_MIN_PROJ_REL = 1.05
 OVER_MIN_OPP_ALLOW_REL = 1.02
 OVER_STAKE_MULT = 0.5
 BLOWOUT_SPREAD = 10.0     # |spread| at or above this = "blowout" tier
-BLOWOUT_MIN_N_CUR = 5     # blowout-tier unders need this many games this season (usage-model bets allowed)
-MIN_N_CUR = 10            # core tier: no bets on a player until he has this many games this season
-                          #   (first 5 games ran -28% in the backtest; 5-15 was +1.4%)
+# Games-played gates. The backtest sample starts 2 weeks into each season, so it has NO data on players
+# with <5 games; the old "10 games" rule was precaution, not evidence. Where there is data, core unders at
+# 5-9 games were +20% (62 bets). So: every tier opens at EARLY_MIN_N_CUR games, bets with fewer than
+# FULL_STAKE_N_CUR games are flagged "early" and staked at EARLY_STAKE_MULT.
+EARLY_MIN_N_CUR = 1       # one real box score this season before any bet (half stakes until FULL_STAKE_N_CUR)
+FULL_STAKE_N_CUR = 5      # below this: half stakes, tier labelled "... (early)"
+EARLY_STAKE_MULT = 0.5
+BLOWOUT_MIN_N_CUR = EARLY_MIN_N_CUR
+MIN_N_CUR = EARLY_MIN_N_CUR   # core tier gate
 SKIP_USAGE_MODEL_BETS = True  # don't bet players whose projection was touched by a teammate being out
                               #   (those bets ran -3.2% vs +0.7% for the rest). OUT players are still removed.
 MAX_DISAGREE = 0.30       # skip (flag) a bet when |projection - line| / line exceeds this: the

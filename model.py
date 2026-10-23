@@ -21,7 +21,8 @@ from config import (PRIOR_SHRINK_K, TEAM_SHRINK_K, MIN_GAMES_TOTAL, MINUTES_LOOK
                     B2B_MINUTES_MULT, MARKET_WEIGHT, MIN_EDGE, MIN_BOOKS, BANKROLL,
                     KELLY_FRACTION, MAX_BET_PCT, MAX_PLAYER_PCT, BETTABLE_BOOKS, MIN_N_CUR,
                     SKIP_USAGE_MODEL_BETS, BET_SIDES, BLOWOUT_SPREAD, BLOWOUT_MIN_N_CUR,
-                    OVER_MAX_SPREAD, OVER_MIN_PROJ_REL, OVER_MIN_OPP_ALLOW_REL, OVER_STAKE_MULT)
+                    OVER_MAX_SPREAD, OVER_MIN_PROJ_REL, OVER_MIN_OPP_ALLOW_REL, OVER_STAKE_MULT,
+                    FULL_STAKE_N_CUR, EARLY_STAKE_MULT)
 from fetch_lines import norm_name, american_to_prob, prob_to_american
 
 STATS = ["PTS", "REB", "AST", "FG3M"]
@@ -281,6 +282,9 @@ def pick_bets(evald: pd.DataFrame) -> pd.DataFrame:
     ok = ok.assign(tier=np.where(blowout, "blowout", np.where(core, "core", np.where(over_ok, "over (experimental)", ""))))
     ok = ok[ok["tier"] != ""]
     ok.loc[ok["tier"] == "over (experimental)", "stake"] = (ok.loc[ok["tier"] == "over (experimental)", "stake"] * OVER_STAKE_MULT).round(2)
+    early = ok["n_cur"] < FULL_STAKE_N_CUR
+    ok.loc[early, "stake"] = (ok.loc[early, "stake"] * EARLY_STAKE_MULT).round(2)
+    ok.loc[early, "tier"] = ok.loc[early, "tier"] + " (early)"
     # one bet per player/stat/side: the one with the best EV (handles alt lines across books)
     ok = ok.sort_values("ev_per_dollar", ascending=False).drop_duplicates(["player_key", "stat", "side"])
     # never both sides of the same player/stat
