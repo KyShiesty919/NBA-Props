@@ -87,7 +87,7 @@ def main():
     print(f"{len(proj)} players projected across {len(slate)} games.")
     evald = evaluate(proj, lines)
     bets = pick_bets(evald)
-    print(f"{len(evald)} priced lines evaluated, {len(bets)} clear the {config.MIN_EDGE:.0%} edge bar.")
+    print(f"{len(evald)} priced lines evaluated, {len(bets)} qualify (edge floor {config.MIN_EDGE_UNDER:.1%} unders / {config.MIN_EDGE_OVER:.0%} overs).")
 
     # ---- outputs -----------------------------------------------------------
     from datetime import datetime
@@ -113,7 +113,7 @@ def main():
               "above the line, opponent allows above average — half stakes, weak evidence; (early) = player has 2-4 games, half stakes)\n"
               + bets[["tier", "abs_spread"] + cols].head(20).to_string(index=False))
     else:
-        watch = evald[(evald["edge"] >= config.MIN_EDGE) & (~evald["suspicious"])
+        watch = evald[(evald["edge"] >= config.MIN_EDGE_UNDER) & (~evald["suspicious"])
                       & (evald["book"].isin(config.BETTABLE_BOOKS) if config.BETTABLE_BOOKS else True)
                       ].sort_values("edge", ascending=False)
         watch = watch.drop_duplicates(["player_key", "stat"]).head(10)

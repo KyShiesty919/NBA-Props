@@ -100,11 +100,19 @@ FULL_STAKE_N_CUR = 5      # below this: half stakes, tier labelled "... (early)"
 EARLY_STAKE_MULT = 0.5
 BLOWOUT_MIN_N_CUR = EARLY_MIN_N_CUR
 MIN_N_CUR = EARLY_MIN_N_CUR   # core tier gate
-SKIP_USAGE_MODEL_BETS = True  # don't bet players whose projection was touched by a teammate being out
+ROTATION_OUT_MIN = 15.0   # an OUT player only counts as "a teammate out" (usage model + inj_note) if his
+                          #   baseline is 15+ minutes — matches the backtest definition. Deep-bench outs are
+                          #   just removed; they don't block bets on the rest of the team.
+SKIP_USAGE_MODEL_BETS = True  # don't bet players whose projection was touched by a ROTATION teammate being out
                               #   (those bets ran -3.2% vs +0.7% for the rest). OUT players are still removed.
 MAX_DISAGREE = 0.30       # skip (flag) a bet when |projection - line| / line exceeds this: the
                           # market almost certainly knows something (role change, injury) the model doesn't
-MIN_EDGE = 0.03           # blended prob - market fair prob, must exceed this to bet
+MIN_EDGE = 0.03           # blended prob - market fair prob, must exceed this to bet (overs, and the first-pass filter)
+# Side-specific floors (backtest_tune on the cached seasons): unders hold their ROI down to a 1% edge
+# (core 1.5%: +6.8% fit / +8.7% blind, ~2x the volume; blowout 1.5%: +6.1% / +17.8%). Overs get worse at
+# every loosening. So unders bet from 1.5%, overs from 3%.
+MIN_EDGE_UNDER = 0.015
+MIN_EDGE_OVER = 0.03
 MIN_BOOKS = 2             # need this many books quoting a prop to trust consensus
 BANKROLL = 1000.0
 KELLY_FRACTION = 0.25

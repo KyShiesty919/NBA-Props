@@ -22,7 +22,7 @@ from config import (PRIOR_SHRINK_K, TEAM_SHRINK_K, MIN_GAMES_TOTAL, MINUTES_LOOK
                     KELLY_FRACTION, MAX_BET_PCT, MAX_PLAYER_PCT, BETTABLE_BOOKS, MIN_N_CUR,
                     SKIP_USAGE_MODEL_BETS, BET_SIDES, BLOWOUT_SPREAD, BLOWOUT_MIN_N_CUR,
                     OVER_MAX_SPREAD, OVER_MIN_PROJ_REL, OVER_MIN_OPP_ALLOW_REL, OVER_STAKE_MULT,
-                    FULL_STAKE_N_CUR, EARLY_STAKE_MULT)
+                    FULL_STAKE_N_CUR, EARLY_STAKE_MULT, MIN_EDGE_UNDER, MIN_EDGE_OVER, ROTATION_OUT_MIN)
 from fetch_lines import norm_name, american_to_prob, prob_to_american
 
 STATS = ["PTS", "REB", "AST", "FG3M"]
@@ -156,7 +156,8 @@ def build_projections(cur, prior, teams, slate, game_date, rosters=None, injurie
             if not base_rows:
                 continue
             tdf = pd.DataFrame(base_rows)
-            avail = redistribute(tdf[~tdf["is_out"]].reset_index(drop=True), tdf[tdf["is_out"]], logs)
+            outs = tdf[tdf["is_out"] & (tdf["minutes"] >= ROTATION_OUT_MIN)]   # deep-bench outs: removed, not redistributed
+            avail = redistribute(tdf[~tdf["is_out"]].reset_index(drop=True), outs, logs)
             pace_adj = 1 + PACE_ADJ_STRENGTH * (tstat.loc[opp, "PACE_REL"] - 1)
             for _, r in avail.iterrows():
                 minutes = r["minutes"] * (B2B_MINUTES_MULT if b2b else 1.0)
@@ -265,7 +266,8 @@ def pick_bets(evald: pd.DataFrame) -> pd.DataFrame:
     """Best price per (player, stat, side), filter by edge/books, cap per-player exposure."""
     if evald.empty:
         return evald
-    ok = evald[(evald["edge"] >= MIN_EDGE) & (evald["n_books"] >= MIN_BOOKS) & (evald["stake"] > 0)
+    edge_floor = np.where(evald["side"] == "under", MIN_EDGE_UNDER, MIN_EDGE_OVER)
+    ok = evald[(evald["edge"] >= edge_floor) & (evald["n_books"] >= MIN_BOOKS) & (evald["stake"] > 0)
                & ~evald["suspicious"]]
     if BETTABLE_BOOKS:
         ok = ok[ok["book"].isin(BETTABLE_BOOKS)]
