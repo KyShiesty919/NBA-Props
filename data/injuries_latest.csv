@@ -16,8 +16,8 @@ Dereck Lively II,dereck lively,DAL,C,Out,True,False,2026-10-26,Lively (foot) has
 Spencer Jones,spencer jones,DEN,F,Day-To-Day,False,True,2026-10-24,"Jones (hamstring) has been ruled out for Thursday's game against Oklahoma City, Justin Martinez of The Oklahoman reports.",2026-10-23
 Cameron Johnson,cameron johnson,DEN,F,Day-To-Day,False,True,2026-10-24,"Johnson (ankle) didn't return to Thursday's game against Oklahoma City. He ended with five points (2-3 FG, 1-1 3Pt), two rebounds and one assist in 11 minutes.",2026-10-23
 Julian Strawther,julian strawther,DEN,G,Out,True,False,2026-11-29,"Strawther (knee) was diagnosed with a left knee sprain Friday and will be re-evaluated in six weeks, Vinny Benedetto of The Denver Gazette reports.",2026-10-23
-Charles Bassey,charles bassey,GSW,C,Day-To-Day,False,True,2026-10-23,Bassey (knee) is listed as questionable for Friday's game against Memphis.,2026-10-23
-Brandin Podziemski,brandin podziemski,GSW,G,Day-To-Day,False,True,2026-10-23,Podziemski (back) is questionable for Friday's game against the Grizzlies.,2026-10-23
+Charles Bassey,charles bassey,GSW,C,Out,True,False,2026-10-24,Bassey (knee) is out for Friday's game versus the Grizzlies.,2026-10-23
+Brandin Podziemski,brandin podziemski,GSW,G,Day-To-Day,False,True,2026-10-23,Podziemski (back) is probable for Friday's game against the Grizzlies.,2026-10-23
 Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2026-12-01,Porzingis is contemplating his future in basketball as he deals with recurring symptoms from the autoimmune condition termed as postural orthostatic tachycardia,2026-10-23
 Moses Moody,moses moody,GSW,G,Out,True,False,2026-12-01,"Moody (knee) is progressing toward a potential return between December and January after rupturing his left patellar tendon in March, Anthony Slater of ESPN rep",2026-10-23
 Jimmy Butler III,jimmy butler,GSW,F,Out,True,False,2027-01-02,"Butler (knee) could return sometime between January and February as he continues recovering from a torn right ACL, Anthony Slater of ESPN reports.",2026-10-23
@@ -32,9 +32,9 @@ Max Strus,max strus,LAC,G,Out,True,False,2026-11-08,"Strus has been diagnosed wi
 Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-08,"Niederhauser (foot) won't be ready for the start of the season, Law Murray of The Athletic reports.",2026-10-23
 Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-08,"Ingram won't be ready for the start of the season due to a partially torn Achilles, per Joey Linn of SI.com.",2026-10-23
 Jordan Miller,jordan miller,LAC,G,Out,True,False,2027-03-02,"Miller underwent surgery Wednesday to repair a torn left rotator cuff and will be re-evaluated in six months, per Law Murray of The Athletic.",2026-10-23
+Jake LaRavia,jake laravia,LAL,F,Out,True,False,2026-10-25,"LaRavia (ankle) has been ruled out for Friday's game against the Clippers, Mark Medina of TheSportingTribune.com reports.",2026-10-23
 Adou Thiero,adou thiero,LAL,F,Out,True,False,2026-10-25,Thiero (knee) is out for Friday's game against the Clippers.,2026-10-23
 Cameron Carr,cameron carr,LAL,G,Out,True,False,2026-10-25,Carr (oblique) is out for Friday's game against the Clippers.,2026-10-23
-Jake LaRavia,jake laravia,LAL,F,Day-To-Day,False,True,2026-10-23,LaRavia (ankle) is listed as questionable for Friday's game against the Clippers.,2026-10-23
 Cedric Coward,cedric coward,MEM,F,Day-To-Day,False,True,2026-10-23,Coward is doubtful for Friday's game against the Warriors due to a left wrist sprain.,2026-10-23
 Isaiah Stewart,isaiah stewart,MEM,C,Day-To-Day,False,True,2026-10-23,Stewart (ankle) is questionable for Friday's game against the Warriors.,2026-10-23
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-10-23
@@ -51,12 +51,11 @@ Dean Wade,dean wade,PHI,F,Day-To-Day,False,True,2026-10-24,Wade (ankle) is out f
 Dominick Barlow,dominick barlow,PHI,F,Out,True,False,2026-11-02,"Barlow will miss at least the next two weeks of action due to a lumbar spine bone stress response, Adam Aaronson of PhillyVoice.com reports.",2026-10-23
 Ariel Hukporti,ariel hukporti,PHI,C,Out,True,False,2027-10-01,"Hukporti has sustained a season-ending ruptured right Achilles tendon, per Shams Charania of ESPN.",2026-10-23
 Luke Kennard,luke kennard,PHX,G,Day-To-Day,False,True,2026-10-24,"Kennard (knee) won't play Wednesday versus Portland, Duane Rankin of The Arizona Republic reports.",2026-10-23
-Oso Ighodaro,oso ighodaro,PHX,F,Day-To-Day,False,True,2026-10-24,"Ighodaro (hip) didn't return to Wednesday's 124-83 loss to Portland, Duane Rankin reports. He finished with eight points (4-7 FG, 0-2 FT), three rebounds and th",2026-10-23
+Oso Ighodaro,oso ighodaro,PHX,F,Day-To-Day,False,True,2026-10-26,"Ighodaro (hip) didn't return to Wednesday's 124-83 loss to Portland, Duane Rankin reports. He finished with eight points (4-7 FG, 0-2 FT), three rebounds and th",2026-10-23
 Mark Williams,mark williams,PHX,C,Out,True,False,2027-02-03,"Williams underwent surgery Thursday to repair a torn labrum in his left shoulder and will miss an extended period of time, Shams Charania of ESPN reports.",2026-10-23
 Branden Carlson,branden carlson,POR,C,Out,True,False,2026-10-27,Carlson (concussion) has been ruled out for Friday's game against Sacramento.,2026-10-23
 Chris Youngblood,chris youngblood,POR,G,Out,True,False,2026-10-27,Youngblood (ankle) is out for Friday's game against the Kings.,2026-10-23
 Shaedon Sharpe,shaedon sharpe,POR,G,Out,True,False,2027-03-02,"Sharpe suffered a torn meniscus in his knee and is expected to miss six months, per Shams Charania of ESPN.",2026-10-23
-Malik Monk,malik monk,SAC,G,Day-To-Day,False,True,2026-10-23,Monk (ankle) is probable for Friday's game against Portland.,2026-10-23
 Ben Simmons,ben simmons,SAC,G,Out,True,False,2027-10-01,"Simmons underwent successful surgery Tuesday to repair a torn right Achilles tendon, James Ham of ESPN 1320 Sacramento reports.",2026-10-23
 Dylan Cardwell,dylan cardwell,SAC,C,Out,True,False,2026-11-02,"Cardwell (calf) is expected to miss at least the first five or six games of the regular season, with a longer absence possible, Frankie Cartoscelli of KHTK Sact",2026-10-23
 Maxime Raynaud,maxime raynaud,SAC,C,Out,True,False,2026-11-02,"Raynaud (knee) is expected to miss at least the first five or six games of the regular season, and potentially longer, Frankie Cartoscelli of KHTK Sactown Sport",2026-10-23
