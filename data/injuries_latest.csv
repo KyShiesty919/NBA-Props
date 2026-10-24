@@ -8,6 +8,7 @@ Coby White,coby white,CHA,G,Day-To-Day,False,True,2026-10-24,White (calf) is out
 Kon Knueppel,kon knueppel,CHA,G,Day-To-Day,False,True,2026-10-24,Knueppel (hamstring) is out for Friday's game against the Hawks.,2026-10-24
 Kylan Boswell,kylan boswell,CHA,G,Out,True,False,2026-11-02,Boswell (knee) is out for Wednesday's season opener against the Nets.,2026-10-24
 Nic Claxton,nic claxton,CHI,C,Out,True,False,2026-11-04,"Claxton (hamstring) will be re-evaluated in two weeks, K.C. Johnson of Chicago Sports Network reports.",2026-10-24
+Kyrie Irving,kyrie irving,DAL,G,Day-To-Day,False,True,2026-10-24,"Irving posted 24 points (8-15 FG, 5-10 3Pt, 3-3 FT), one rebound, three assists, one block and one steal over 25 minutes before fouling out of Friday's 121-105 ",2026-10-24
 Caleb Martin,caleb martin,DAL,F,Day-To-Day,False,True,2026-10-24,Martin (thumb) has been ruled out for Fridays' game against the Pacers.,2026-10-24
 Jett Howard,jett howard,DAL,G,Day-To-Day,False,True,2026-10-24,Howard (calf) is out for Friday's game in Indiana.,2026-10-24
 Tarik Biberovic,tarik biberovic,DAL,F,Day-To-Day,False,True,2026-10-24,Biberovic (heel) is out for Friday's game against Indiana.,2026-10-24
@@ -20,11 +21,15 @@ Alpha Diallo,alpha diallo,DEN,F,Day-To-Day,False,True,2026-10-24,Diallo is quest
 Julian Strawther,julian strawther,DEN,G,Out,True,False,2026-11-29,"Strawther (knee) was diagnosed with a left knee sprain Friday and will be re-evaluated in six weeks, Vinny Benedetto of The Denver Gazette reports.",2026-10-24
 Ausar Thompson,ausar thompson,DET,G,Day-To-Day,False,True,2026-10-25,"Thompson exited Friday's game with an undisclosed injury and did not return, finishing with four points (2-5 FG, 0-1 3Pt), three rebounds, four assists, one ste",2026-10-24
 Jalen Duren,jalen duren,DET,C,Day-To-Day,False,True,2026-10-25,"Duren (thigh) exited Friday's 128-111 win over the Heat in the second quarter and did not return, finishing with four points (2-4 FG), six rebounds, three assis",2026-10-24
-Charles Bassey,charles bassey,GSW,C,Out,True,False,2026-10-24,Bassey (knee) is out for Friday's game versus the Grizzlies.,2026-10-24
+Brandin Podziemski,brandin podziemski,GSW,G,Out,True,False,2026-10-26,"Podziemski (back) told reporters Friday that he will not play in the second leg of the Warriors' back-to-back set Saturday against the Suns, Nick Friedell of Th",2026-10-24
+Stephen Curry,stephen curry,GSW,G,Day-To-Day,False,True,2026-10-24,"Curry told reporters after Friday's loss to the Grizzlies that he will ""probably not"" play against the Suns on Saturday, Nick Friedell of The Athletic reports.",2026-10-24
+Charles Bassey,charles bassey,GSW,C,Day-To-Day,False,True,2026-10-24,Bassey (knee) is out for Friday's game versus the Grizzlies.,2026-10-24
 Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2026-12-01,Porzingis is contemplating his future in basketball as he deals with recurring symptoms from the autoimmune condition termed as postural orthostatic tachycardia,2026-10-24
 Moses Moody,moses moody,GSW,G,Out,True,False,2026-12-01,"Moody (knee) is progressing toward a potential return between December and January after rupturing his left patellar tendon in March, Anthony Slater of ESPN rep",2026-10-24
 Jimmy Butler III,jimmy butler,GSW,F,Out,True,False,2027-01-02,"Butler (knee) could return sometime between January and February as he continues recovering from a torn right ACL, Anthony Slater of ESPN reports.",2026-10-24
-Reed Sheppard,reed sheppard,HOU,G,Out,True,False,2026-10-24,Sheppard (knee) is out for Friday's game in San Antonio.,2026-10-24
+Steven Adams,steven adams,HOU,C,Day-To-Day,False,True,2026-10-24,Adams (rest) will likely be sidelined for Saturday's game against the Hawks.,2026-10-24
+Fred VanVleet,fred vanvleet,HOU,G,Day-To-Day,False,True,2026-10-24,VanVleet (rest) is unlikely to play in the second leg of the Rockets' back-to-back set Saturday against the Hawks.,2026-10-24
+Reed Sheppard,reed sheppard,HOU,G,Day-To-Day,False,True,2026-10-24,Sheppard (knee) is out for Friday's game in San Antonio.,2026-10-24
 T.J. McConnell,tj mcconnell,IND,G,Day-To-Day,False,True,2026-10-25,McConnell (hamstring) is out for Friday's game against Dallas.,2026-10-24
 Ben Sheppard,ben sheppard,IND,G,Out,True,False,2026-12-01,"Sheppard has been diagnosed with a torn meniscus in his left knee and is without a timetable for a return to game action, Scott Agness of FieldhouseFiles.com re",2026-10-24
 Johnny Furphy,johnny furphy,IND,G,Out,True,False,2027-01-02,"Furphy was diagnosed with a torn right ACL on Monday and will miss the remainder of the season, Michael Scotto of USA Today reports.",2026-10-24
@@ -33,10 +38,10 @@ Max Strus,max strus,LAC,G,Out,True,False,2026-11-08,"Strus has been diagnosed wi
 Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-08,"Niederhauser (foot) won't be ready for the start of the season, Law Murray of The Athletic reports.",2026-10-24
 Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-08,"Ingram won't be ready for the start of the season due to a partially torn Achilles, per Joey Linn of SI.com.",2026-10-24
 Jordan Miller,jordan miller,LAC,G,Out,True,False,2027-03-02,"Miller underwent surgery Wednesday to repair a torn left rotator cuff and will be re-evaluated in six months, per Law Murray of The Athletic.",2026-10-24
-Jake LaRavia,jake laravia,LAL,F,Out,True,False,2026-10-25,"LaRavia (ankle) has been ruled out for Friday's game against the Clippers, Mark Medina of TheSportingTribune.com reports.",2026-10-24
-Adou Thiero,adou thiero,LAL,F,Out,True,False,2026-10-25,Thiero (knee) is out for Friday's game against the Clippers.,2026-10-24
-Cameron Carr,cameron carr,LAL,G,Out,True,False,2026-10-25,Carr (oblique) is out for Friday's game against the Clippers.,2026-10-24
-Cedric Coward,cedric coward,MEM,F,Out,True,False,2026-10-25,Coward (wrist) has been ruled out for Friday's game against the Warriors.,2026-10-24
+Adou Thiero,adou thiero,LAL,F,Day-To-Day,False,True,2026-10-25,Thiero (knee) is out for Friday's game against the Clippers.,2026-10-24
+Jake LaRavia,jake laravia,LAL,F,Day-To-Day,False,True,2026-10-25,"LaRavia (ankle) has been ruled out for Friday's game against the Clippers, Mark Medina of TheSportingTribune.com reports.",2026-10-24
+Cameron Carr,cameron carr,LAL,G,Day-To-Day,False,True,2026-10-25,Carr (oblique) is out for Friday's game against the Clippers.,2026-10-24
+Cedric Coward,cedric coward,MEM,F,Day-To-Day,False,True,2026-10-25,Coward (wrist) has been ruled out for Friday's game against the Warriors.,2026-10-24
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-10-24
 Yves Missi,yves missi,NOP,C,Day-To-Day,False,True,2026-10-24,Missi won't return to Friday's game against the Jazz due to a left knee injury.,2026-10-24
 Otega Oweh,otega oweh,OKC,G,Out,True,False,2027-07-01,The Thunder plan to waive Oweh (Achilles) on Friday.,2026-10-24
@@ -55,16 +60,16 @@ Ariel Hukporti,ariel hukporti,PHI,C,Out,True,False,2027-10-01,"Hukporti has sust
 Luke Kennard,luke kennard,PHX,G,Day-To-Day,False,True,2026-10-24,Kennard (knee) is questionable to play Saturday against the Warriors.,2026-10-24
 Oso Ighodaro,oso ighodaro,PHX,F,Day-To-Day,False,True,2026-10-24,Ighodaro (oblique) is listed as doubtful for Saturday's game against Golden State.,2026-10-24
 Mark Williams,mark williams,PHX,C,Out,True,False,2027-02-03,"Williams underwent surgery Thursday to repair a torn labrum in his left shoulder and will miss an extended period of time, Shams Charania of ESPN reports.",2026-10-24
-Branden Carlson,branden carlson,POR,C,Out,True,False,2026-10-27,Carlson (concussion) has been ruled out for Friday's game against Sacramento.,2026-10-24
-Chris Youngblood,chris youngblood,POR,G,Out,True,False,2026-10-27,Youngblood (ankle) is out for Friday's game against the Kings.,2026-10-24
+Chris Youngblood,chris youngblood,POR,G,Day-To-Day,False,True,2026-10-27,Youngblood (ankle) is out for Friday's game against the Kings.,2026-10-24
+Branden Carlson,branden carlson,POR,C,Day-To-Day,False,True,2026-10-27,Carlson (concussion) has been ruled out for Friday's game against Sacramento.,2026-10-24
 Shaedon Sharpe,shaedon sharpe,POR,G,Out,True,False,2027-03-02,"Sharpe suffered a torn meniscus in his knee and is expected to miss six months, per Shams Charania of ESPN.",2026-10-24
 Ben Simmons,ben simmons,SAC,G,Out,True,False,2027-10-01,"Simmons underwent successful surgery Tuesday to repair a torn right Achilles tendon, James Ham of ESPN 1320 Sacramento reports.",2026-10-24
 Dylan Cardwell,dylan cardwell,SAC,C,Out,True,False,2026-11-02,"Cardwell (calf) is expected to miss at least the first five or six games of the regular season, with a longer absence possible, Frankie Cartoscelli of KHTK Sact",2026-10-24
 Maxime Raynaud,maxime raynaud,SAC,C,Out,True,False,2026-11-02,"Raynaud (knee) is expected to miss at least the first five or six games of the regular season, and potentially longer, Frankie Cartoscelli of KHTK Sactown Sport",2026-10-24
-Tobias Harris,tobias harris,SAS,F,Out,True,False,2026-10-24,Harris (calf) is out for Friday's game against the Rockets.,2026-10-24
+Tobias Harris,tobias harris,SAS,F,Day-To-Day,False,True,2026-10-24,Harris (calf) is out for Friday's game against the Rockets.,2026-10-24
 Jayden Quaintance,jayden quaintance,SAS,F,Out,True,False,2026-12-03,"Quaintance has been around the team but has not yet been cleared for basketball activities, Matt Guzman of SI.com reports.",2026-10-24
 Nate Bittle,nate bittle,TOR,C,Out,True,False,2026-10-28,Bittle (foot) is out for Wednesday's season opener against the Bulls.,2026-10-24
-Trey Alexander,trey alexander,UTA,G,Out,True,False,2026-10-25,Alexander won't play Wednesday against the Grizzlies due to a left knee bone bruise.,2026-10-24
+Trey Alexander,trey alexander,UTA,G,Day-To-Day,False,True,2026-10-25,Alexander won't play Wednesday against the Grizzlies due to a left knee bone bruise.,2026-10-24
 Jusuf Nurkic,jusuf nurkic,UTA,C,Out,True,False,2026-11-04,"Nurkic will miss at least the next four weeks due to a partial plantar plate tear of second toe in right foot, Chris Haynes of NBA TV reports.",2026-10-24
 AJ Dybantsa,aj dybantsa,WAS,F,Day-To-Day,False,True,2026-10-24,"Dybantsa (ankle) is out for Friday's game against the Raptors, Josh Robbins of The Athletic reports.",2026-10-24
 Tristan Vukcevic,tristan vukcevic,WAS,F,Out,True,False,2026-11-02,The Wizards announced Thursday that Vukcevic (hip) will be re-evaluated in four weeks.,2026-10-24
