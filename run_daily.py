@@ -31,7 +31,7 @@ from model import blend_team_stats, build_projections, evaluate, pick_bets
 
 LEDGER_COLS = ["date", "game", "player_id", "player", "player_key", "team", "opp", "stat", "side",
                "line", "book", "price", "projection", "model_prob", "mkt_fair_prob", "blended_prob",
-               "edge", "ev_per_dollar", "stake", "n_cur", "dtd", "inj_note", "tier", "abs_spread", "event_id", "fetched_utc",
+               "edge", "ev_per_dollar", "stake", "n_cur", "dtd", "inj_note", "tier", "abs_spread", "status", "event_id", "fetched_utc",
                "actual", "result", "close_price", "close_fair_prob", "clv", "profit"]
 
 
@@ -99,12 +99,7 @@ def main():
     print(f"Wrote {out}")
 
     if "--no-ledger" not in args:
-        if LEDGER.exists():   # re-run same day: replace today's picks (even with an empty board)
-            old = pd.read_csv(LEDGER)
-            old[old["date"] != today.isoformat()].to_csv(LEDGER, index=False)
-        if not bets.empty:
-            append_ledger(bets, today)
-        print(f"Appended {len(bets)} picks to {LEDGER}")
+        update_ledger(bets, today, rescore)
 
     cols = ["player", "stat", "side", "line", "book", "price", "projection", "blended_prob", "edge", "stake", "n_cur"]
     if not bets.empty:
@@ -145,6 +140,45 @@ def report_changes(bets: pd.DataFrame, today: date):
         for k in added[:25]:
             r = bets[(bets["player"] == k[0]) & (bets["stat"] == k[1]) & (bets["side"] == k[2])].iloc[0]
             print(f"   + {k[0]} {k[1]} {k[2]} {r['line']} @ {r['book']} {r['price']:+d} (edge {r['edge']:.1%}) {r.get('inj_note', '')}")
+
+
+def update_ledger(bets: pd.DataFrame, today: date, rescore: bool):
+    """
+    Morning run: today's rows are replaced by this board (it IS the record of what was recommended).
+    Re-score:    never deletes. Picks still on the board are left alone; picks that fell off are marked
+                 status='dropped HH:MM' (still graded, reported separately); new picks are appended with
+                 status='added HH:MM'. That way the ledger always reflects what Kyle could have bet on.
+    """
+    from datetime import datetime
+    stamp = datetime.now().strftime("%H:%M")
+    key = ["player_key", "stat", "side"]
+    if not LEDGER.exists() or not rescore:
+        if LEDGER.exists():
+            old = pd.read_csv(LEDGER)
+            old = old[old["date"] != today.isoformat()]
+            old.to_csv(LEDGER, index=False)
+        if not bets.empty:
+            append_ledger(bets, today)
+        return
+    old = pd.read_csv(LEDGER)
+    if "status" not in old.columns:
+        old["status"] = ""
+    old["status"] = old["status"].fillna("")
+    today_mask = old["date"] == today.isoformat()
+    cur = set(map(tuple, bets[key].to_numpy().tolist())) if not bets.empty else set()
+    for i in old.index[today_mask]:
+        k = (old.at[i, "player_key"], old.at[i, "stat"], old.at[i, "side"])
+        if k not in cur and not str(old.at[i, "status"]).startswith("dropped"):
+            old.at[i, "status"] = f"dropped {stamp}"
+        elif k in cur and str(old.at[i, "status"]).startswith("dropped"):
+            old.at[i, "status"] = f"re-added {stamp}"
+    old.to_csv(LEDGER, index=False)
+    if not bets.empty:
+        have = set(map(tuple, old.loc[today_mask, key].to_numpy().tolist()))
+        new = bets[[tuple(r) not in have for r in bets[key].to_numpy().tolist()]].copy()
+        if not new.empty:
+            new["status"] = f"added {stamp}"
+            append_ledger(new, today)
 
 
 def append_ledger(bets: pd.DataFrame, today: date):

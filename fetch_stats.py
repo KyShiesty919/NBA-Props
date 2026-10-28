@@ -13,6 +13,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, timedelta
 
+from pathlib import Path
+
 import pandas as pd
 import requests
 
@@ -45,8 +47,21 @@ def _get(url, params=None, retries=3):
     return None
 
 
+def _stamp(p):
+    return Path(str(p) + ".fetched")
+
+
+def _mark_fetched(p):
+    _stamp(p).write_text(date.today().isoformat())
+
+
 def _cache_is_today(p) -> bool:
-    return p.exists() and date.fromtimestamp(p.stat().st_mtime) == date.today()
+    """Freshness by an explicit stamp, NOT mtime: git pull rewrites files and would make stale data look fresh."""
+    p = Path(p)
+    if not p.exists():
+        return False
+    st = _stamp(p)
+    return st.exists() and st.read_text().strip() == date.today().isoformat()
 
 
 def std(abbr: str) -> str:
@@ -79,6 +94,7 @@ def rosters(force=False) -> pd.DataFrame:
                          "POS": a.get("position", {}).get("abbreviation", "")})
     df = pd.DataFrame(rows)
     df.to_csv(p, index=False)
+    _mark_fetched(p)
     return df
 
 
@@ -150,6 +166,7 @@ def player_game_logs(season: str, force=False) -> pd.DataFrame:
     # TEAM_ID from roster (current team) — used for continuity with model.py
     df = df.merge(ros[["PLAYER_ID", "TEAM_ID"]], on="PLAYER_ID", how="left")
     df.to_csv(cache, index=False)
+    _mark_fetched(cache)
     return _finish(df)
 
 

@@ -102,8 +102,17 @@ def report(led: pd.DataFrame) -> pd.DataFrame:
             "clv_pos_rate": round((x["clv"] > 0).mean(), 3) if "clv" in x and x["clv"].notna().any() else np.nan,
         })
 
-    overall = summarise(g).to_frame("ALL").T
+    if "status" in g.columns:
+        g["status"] = g["status"].fillna("")
+        live = g[~g["status"].str.startswith("dropped")]
+        overall = pd.concat([summarise(live).to_frame("ALL (excl. dropped)").T,
+                             summarise(g[g["status"].str.startswith("dropped")]).to_frame("dropped by re-score").T])
+        g = live
+    else:
+        overall = summarise(g).to_frame("ALL").T
     by_stat = g.groupby("stat").apply(summarise)
+    g["tier_base"] = g["tier"].fillna("").str.replace(" (early)", "", regex=False) if "tier" in g.columns else ""
+    by_tier = g.groupby("tier_base").apply(summarise)
     by_side = g.groupby("side").apply(summarise)
     # Calibration: does a 58% blended prob win 58% of the time?
     bins = [0, 0.52, 0.55, 0.58, 0.62, 0.66, 1.0]
@@ -118,6 +127,7 @@ def report(led: pd.DataFrame) -> pd.DataFrame:
     z = pr.mean() / (pr.std(ddof=1) / np.sqrt(n)) if n > 1 and pr.std() > 0 else np.nan
 
     print("\n=== OVERALL ===");   print(overall.to_string())
+    print("\n=== BY TIER ===");   print(by_tier.to_string())
     print("\n=== BY PROP ===");   print(by_stat.to_string())
     print("\n=== BY SIDE ===");   print(by_side.to_string())
     print("\n=== CALIBRATION ==="); print(calib.to_string())
@@ -127,10 +137,11 @@ def report(led: pd.DataFrame) -> pd.DataFrame:
     out = OUT_DIR / "performance_report.xlsx"
     with pd.ExcelWriter(out, engine="openpyxl") as xw:
         overall.to_excel(xw, sheet_name="Overall")
+        by_tier.to_excel(xw, sheet_name="By tier")
         by_stat.to_excel(xw, sheet_name="By prop")
         by_side.to_excel(xw, sheet_name="By side")
         calib.to_excel(xw, sheet_name="Calibration")
-        g.drop(columns=["win", "dec", "bucket"]).to_excel(xw, sheet_name="Graded bets", index=False)
+        g.drop(columns=["win", "dec", "bucket", "tier_base"], errors="ignore").to_excel(xw, sheet_name="Graded bets", index=False)
     print(f"\nReport -> {out}")
     return overall
 
