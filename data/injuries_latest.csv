@@ -25,8 +25,8 @@ Alpha Diallo,alpha diallo,DEN,F,Out,True,False,2026-10-30,Diallo is out for Wedn
 Julian Strawther,julian strawther,DEN,G,Out,True,False,2026-11-29,"Strawther (knee) was diagnosed with a left knee sprain Friday and will be re-evaluated in six weeks, Vinny Benedetto of The Denver Gazette reports.",2026-10-28
 Isaiah Joe,isaiah joe,DET,G,Day-To-Day,False,True,2026-10-28,Joe (hip) has been ruled out for Tuesday's game against the Knicks.,2026-10-28
 Jalen Duren,jalen duren,DET,C,Out,True,False,2026-11-09,"Duren will be re-evaluated in two weeks due to a right hamstring strain, Eric Vincent of ClutchPoints.com reports.",2026-10-28
+Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2026-12-01,"The Warriors are exploring potential trades involving Porzingis (personal), who remains away from the team indefinitely while dealing with ongoing health concer",2026-10-28
 Yaxel Lendeborg,yaxel lendeborg,GSW,F,Day-To-Day,False,True,2026-10-28,Lendeborg (foot) is questionable for Wednesday's game against Minnesota.,2026-10-28
-Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2026-12-01,Porzingis is contemplating his future in basketball as he deals with recurring symptoms from the autoimmune condition termed as postural orthostatic tachycardia,2026-10-28
 Moses Moody,moses moody,GSW,G,Out,True,False,2026-12-01,"Moody (knee) is progressing toward a potential return between December and January after rupturing his left patellar tendon in March, Anthony Slater of ESPN rep",2026-10-28
 Jimmy Butler III,jimmy butler,GSW,F,Out,True,False,2027-01-02,"Butler (knee) could return sometime between January and February as he continues recovering from a torn right ACL, Anthony Slater of ESPN reports.",2026-10-28
 Marcus Smart,marcus smart,HOU,G,Day-To-Day,False,True,2026-10-28,Smart (forearm) is questionable for Wednesday's game versus the Bucks.,2026-10-28
@@ -48,8 +48,7 @@ Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-08,"Ingram won't be r
 Jordan Miller,jordan miller,LAC,G,Out,True,False,2027-03-02,"Miller underwent surgery Wednesday to repair a torn left rotator cuff and will be re-evaluated in six months, per Law Murray of The Athletic.",2026-10-28
 Cameron Carr,cameron carr,LAL,G,Out,True,False,2026-10-28,"The Lakers recalled Carr (oblique) from the G League's Coachella Valley Lakers on Tuesday, Mark Medina of TheSportingTribune.com reports.",2026-10-28
 Adou Thiero,adou thiero,LAL,F,Out,True,False,2026-10-28,Thiero (knee) is out for Tuesday's game against Portland.,2026-10-28
-Pelle Larsson,pelle larsson,MIA,G,Day-To-Day,False,True,2026-10-28,Larsson is listed as probable for Wednesday's game at Atlanta due to a right ankle sprain.,2026-10-28
-Simone Fontecchio,simone fontecchio,MIA,F,Day-To-Day,False,True,2026-10-28,"Fontecchio is doubtful for Wednesday's game in Atlanta due to an illness, per Tim Reynolds of Associated Press.",2026-10-28
+Simone Fontecchio,simone fontecchio,MIA,F,Out,True,False,2026-10-30,Fontecchio (illness) is out for Wednesday's game against the Hawks.,2026-10-28
 Anthony Edwards,anthony edwards,MIN,G,Out,True,False,2026-12-21,"Edwards will undergo arthroscopic right knee surgery and is expected to miss up to two months, Shams Charania of ESPN reports.",2026-10-28
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-10-28
 Jordan Poole,jordan poole,NOP,G,Day-To-Day,False,True,2026-10-28,Poole (illness) is listed as probable for Wednesday's game against Denver.,2026-10-28
@@ -63,6 +62,7 @@ Alex Caruso,alex caruso,OKC,G,Out,True,False,2026-10-31,Caruso (ankle) won't pla
 Jalen Williams,jalen williams,OKC,G,Out,True,False,2027-03-02,"Williams has been diagnosed with a dislocated left ankle and fractured fibula, which will require surgery, Shams Charania of ESPN reports.",2026-10-28
 Cason Wallace,cason wallace,OKC,G,Out,True,False,2027-03-02,"Wallace has been diagnosed with a torn labrum in his left shoulder and will require surgery, Shams Charania of ESPN reports.",2026-10-28
 Otega Oweh,otega oweh,OKC,G,Out,True,False,2027-07-01,The Thunder plan to waive Oweh (Achilles) on Friday.,2026-10-28
+Anthony Black,anthony black,ORL,G,Day-To-Day,False,True,2026-10-28,"Black (personal) was not present at Wednesday's morning shootaround, Jason Beede of the Orlando Sentinel reports.",2026-10-28
 Jonathan Isaac,jonathan isaac,ORL,F,Out,True,False,2026-10-30,Isaac (knee) has been ruled out ahead of Wednesday's game against the Raptors.,2026-10-28
 Jalen Suggs,jalen suggs,ORL,G,Out,True,False,2026-11-10,"Suggs has been diagnosed with a mild bone bruise in his right knee and will be re-evaluated in two weeks, Shams Charania of ESPN reports.",2026-10-28
 Paolo Banchero,paolo banchero,ORL,F,Out,True,False,2026-11-22,"Banchero is expected to be sidelined for the next four-to-six weeks due to a right high-ankle sprain, Shams Charania of ESPN reports.",2026-10-28
@@ -89,7 +89,7 @@ Lauri Markkanen,lauri markkanen,UTA,F,Day-To-Day,False,True,2026-10-28,Markkanen
 Jaren Jackson Jr.,jaren jackson,UTA,F,Out,True,False,2026-12-14,"Jackson has been diagnosed with a torn MCL in his right knee and will be sidelined for 6-to-8 weeks, per Shams Charania of ESPN.",2026-10-28
 Trey Alexander,trey alexander,UTA,G,Out,True,False,2026-11-06,Alexander won't play Wednesday against the Grizzlies due to a left knee bone bruise.,2026-10-28
 Jusuf Nurkic,jusuf nurkic,UTA,C,Out,True,False,2026-11-04,"Nurkic will miss at least the next four weeks due to a partial plantar plate tear of second toe in right foot, Chris Haynes of NBA TV reports.",2026-10-28
+AJ Dybantsa,aj dybantsa,WAS,F,Out,True,False,2026-10-28,"Dybantsa (ankle) was present at Wednesday's morning shootaround,Josh Robbins of The Athletic reports.",2026-10-28
 Justin Champagnie,justin champagnie,WAS,F,Out,True,False,2026-10-30,Champagnie (foot) is out for Wednesday's game versus Cleveland.,2026-10-28
-AJ Dybantsa,aj dybantsa,WAS,F,Out,True,False,2026-10-28,Dybantsa (ankle) is questionable for Wednesday's game versus Cleveland.,2026-10-28
 Tristan Vukcevic,tristan vukcevic,WAS,F,Out,True,False,2026-11-02,The Wizards announced Thursday that Vukcevic (hip) will be re-evaluated in four weeks.,2026-10-28
 Jamir Watkins,jamir watkins,WAS,G,Out,True,False,2027-04-02,The Wizards announced Thursday that Watkins has undergone surgery for a torn ACL.,2026-10-28
