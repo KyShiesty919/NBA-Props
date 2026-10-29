@@ -2,7 +2,7 @@ player,player_key,team,pos,status,is_out,is_dtd,return_date,note,as_of
 Mouhamed Gueye,mouhamed gueye,ATL,F,Out,True,False,2026-11-20,"Gueye underwent surgery Tuesday to repair a fractured left foot that he suffered during a workout last week, Brad Rowland of the Locked On Podcast Network repor",2026-10-29
 Henri Veesaar,henri veesaar,ATL,C,Out,True,False,2027-07-01,"Veesaar was diagnosed with a torn right ACL and is expected to miss the 2026-27 season, the Hawks announced Monday.",2026-10-29
 Devin Carter,devin carter,BOS,G,Out,True,False,2026-11-08,"Carter has been diagnosed with mononucleosis and is without a timetable for a return, Gary Washburn of The Boston Globe reports.",2026-10-29
-Egor Demin,egor demin,BKN,G,Day-To-Day,False,True,2026-10-30,"Demin (leg) stated he isn't sure if he will be able to play in Friday's game against Detroit, Erik Slater of ClutchPoints.com reports.",2026-10-29
+Egor Demin,egor demin,BKN,G,Out,True,False,2026-11-07,"Demin has been diagnosed with a right leg bone bruise and will be reevaluated in one week, Ian Begley of SportsNet New York reports Thursday. The injury occurre",2026-10-29
 Tyler Bilodeau,tyler bilodeau,BKN,F,Out,True,False,2026-10-30,Bilodeau (shoulder) has been ruled out for Sunday's game against Indiana.,2026-10-29
 Coby White,coby white,CHA,G,Out,True,False,2026-11-02,"Head coach Charles Lee said Monday that White (calf) remains without a timeline for a return, though Lee added that he'll have a better idea of where things sta",2026-10-29
 Kon Knueppel,kon knueppel,CHA,G,Out,True,False,2026-11-02,"Knueppel (hamstring) is without a timetable for a return, Rod Boone of The Charlotte Observer reports.",2026-10-29
@@ -75,8 +75,8 @@ Keegan Murray,keegan murray,SAC,F,Out,True,False,2026-11-06,"Murray (ankle) will
 Ben Simmons,ben simmons,SAC,G,Out,True,False,2027-10-01,"Simmons underwent successful surgery Tuesday to repair a torn right Achilles tendon, James Ham of ESPN 1320 Sacramento reports.",2026-10-29
 Tobias Harris,tobias harris,SAS,F,Out,True,False,2026-10-31,"Harris (calf) is out for Wednesday's game against Utah, Paul Garcia of ProjectSpurs.com reports.",2026-10-29
 Jayden Quaintance,jayden quaintance,SAS,F,Out,True,False,2026-12-03,"Quaintance has been around the team but has not yet been cleared for basketball activities, Matt Guzman of SI.com reports.",2026-10-29
+Kawhi Leonard,kawhi leonard,TOR,F,Out,True,False,2026-11-23,"Leonard (knee) is expected to be sidelined for at least three to four weeks, Chris Haynes of NBA TV reports.",2026-10-29
 Nate Bittle,nate bittle,TOR,C,Out,True,False,2026-11-02,"Bittle (foot) has been ruled out for Wednesday's game against the Magic, Cody Taylor of USA Today reports.",2026-10-29
-Kawhi Leonard,kawhi leonard,TOR,F,Out,True,False,2026-11-23,"Leonard (knee) is expected to miss multiple weeks due to swelling in his left knee, Shams Charania of ESPN reports.",2026-10-29
 Lauri Markkanen,lauri markkanen,UTA,F,Day-To-Day,False,True,2026-10-31,Markkanen (wrist) is out for Wednesday's tilt against the Spurs.,2026-10-29
 Jaren Jackson Jr.,jaren jackson,UTA,F,Out,True,False,2026-12-14,"Jackson has been diagnosed with a torn MCL in his right knee and will be sidelined for 6-to-8 weeks, per Shams Charania of ESPN.",2026-10-29
 Trey Alexander,trey alexander,UTA,G,Out,True,False,2026-11-06,Alexander won't play Wednesday against the Grizzlies due to a left knee bone bruise.,2026-10-29

@@ -22,7 +22,8 @@ from config import (PRIOR_SHRINK_K, TEAM_SHRINK_K, MIN_GAMES_TOTAL, MINUTES_LOOK
                     KELLY_FRACTION, MAX_BET_PCT, MAX_PLAYER_PCT, BETTABLE_BOOKS, MIN_N_CUR,
                     SKIP_USAGE_MODEL_BETS, BET_SIDES, BLOWOUT_SPREAD, BLOWOUT_MIN_N_CUR,
                     OVER_MAX_SPREAD, OVER_MIN_PROJ_REL, OVER_MIN_OPP_ALLOW_REL, OVER_STAKE_MULT,
-                    FULL_STAKE_N_CUR, EARLY_STAKE_MULT, MIN_EDGE_UNDER, MIN_EDGE_OVER, ROTATION_OUT_MIN)
+                    FULL_STAKE_N_CUR, EARLY_STAKE_MULT, MIN_EDGE_UNDER, MIN_EDGE_OVER, ROTATION_OUT_MIN,
+                    EARLY_MIN_N_CUR)
 from fetch_lines import norm_name, american_to_prob, prob_to_american
 
 STATS = ["PTS", "REB", "AST", "FG3M"]
@@ -260,6 +261,82 @@ def evaluate(proj: pd.DataFrame, lines: pd.DataFrame) -> pd.DataFrame:
     keep.insert(9, "projection")
     keep.remove("mu_PTS")
     return res[[c for c in keep if c in res.columns]].sort_values("edge", ascending=False)
+
+
+# Backtest ROI (blind 2025-26 unless noted) for the kinds of bets the Leans sheet surfaces, so the
+# cost of going down the list is visible on every row.
+LEAN_ROI = {
+    "qualifies":                 "tier bet",
+    "under, teammate out":       "-3% to -7% (blind)",
+    "under, edge 1-1.5%":        "~+2% (all unders, blind)",
+    "under, edge <1%":           "untested; expect ~-vig",
+    "over, close game, model +5%, opp defense avg or better": "-1% to -5% (blind)",
+    "over, spread > 6":          "-2% (all overs, blind)",
+    "over, model < +5%":         "-2% (all overs, blind)",
+    "over, edge < 3%":           "-2% to -3% (blind)",
+    "model disagrees with book by 30%+": "book knows something; skip",
+    "fewer than 2 books":        "no consensus; skip",
+    "only at a book you can't use": "shop it",
+    "0 games this season":       "untested",
+}
+
+
+def leans(evald: pd.DataFrame, bets: pd.DataFrame) -> pd.DataFrame:
+    """
+    Every prop the model leans on (edge >= 1% either side), one row per player/stat, best price,
+    with WHY it is not a tier bet and the backtest ROI for that kind of bet. The honest 'go down the
+    list' sheet: the tiers are at the top, everything below them has a stated expected cost.
+    """
+    if evald.empty:
+        return evald
+    d = evald[(evald["edge"] >= 0.01)].copy()
+    if d.empty:
+        return d
+    bet_keys = set(map(tuple, bets[["player_key", "stat", "side"]].to_numpy().tolist())) if not bets.empty else set()
+    spread = d["abs_spread"] if "abs_spread" in d.columns else pd.Series(np.nan, index=d.index)
+    inj = d["inj_note"].fillna("").astype(str).str.len() > 0
+    proj_rel = d["projection"] / d["line"].clip(lower=0.5)
+    reasons = []
+    for i, r in d.iterrows():
+        k = (r["player_key"], r["stat"], r["side"])
+        if k in bet_keys:
+            reasons.append("qualifies"); continue
+        if r["suspicious"]:
+            reasons.append("model disagrees with book by 30%+"); continue
+        if r["n_books"] < MIN_BOOKS:
+            reasons.append("fewer than 2 books"); continue
+        if r["n_cur"] < EARLY_MIN_N_CUR if "n_cur" in r else False:
+            reasons.append("0 games this season"); continue
+        if BETTABLE_BOOKS and r["book"] not in BETTABLE_BOOKS:
+            reasons.append("only at a book you can't use"); continue
+        if r["side"] == "under":
+            if r["edge"] < 0.01:
+                reasons.append("under, edge <1%")
+            elif r["edge"] < MIN_EDGE_UNDER:
+                reasons.append("under, edge 1-1.5%")
+            elif inj.loc[i]:
+                reasons.append("under, teammate out")
+            else:
+                reasons.append("under (other)")
+        else:
+            if r["edge"] < MIN_EDGE_OVER:
+                reasons.append("over, edge < 3%")
+            elif not (spread.loc[i] <= OVER_MAX_SPREAD):
+                reasons.append("over, spread > 6")
+            elif proj_rel.loc[i] < OVER_MIN_PROJ_REL:
+                reasons.append("over, model < +5%")
+            elif not (r.get("opp_allow_rel", 0) >= OVER_MIN_OPP_ALLOW_REL):
+                reasons.append("over, close game, model +5%, opp defense avg or better")
+            else:
+                reasons.append("over (other)")
+    d["why_not_a_bet"] = reasons
+    d["backtest_roi"] = d["why_not_a_bet"].map(LEAN_ROI).fillna("—")
+    # best bettable price per player/stat/side, never both sides
+    d["bettable"] = d["book"].isin(BETTABLE_BOOKS) if BETTABLE_BOOKS else True
+    d = d.sort_values(["bettable", "ev_per_dollar"], ascending=[False, False]).drop_duplicates(["player_key", "stat", "side"])
+    d = d.sort_values("edge", ascending=False).drop_duplicates(["player_key", "stat"])
+    d["rank"] = np.where(d["why_not_a_bet"] == "qualifies", 0, 1)
+    return d.sort_values(["rank", "edge"], ascending=[True, False]).drop(columns=["rank", "bettable"])
 
 
 def pick_bets(evald: pd.DataFrame) -> pd.DataFrame:

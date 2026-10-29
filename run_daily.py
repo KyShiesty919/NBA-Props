@@ -27,7 +27,7 @@ from openpyxl.utils import get_column_letter
 import config
 from config import LEDGER, OUT_DIR, SEASON, PRIOR_SEASON
 from fetch_lines import devig
-from model import blend_team_stats, build_projections, evaluate, pick_bets
+from model import blend_team_stats, build_projections, evaluate, pick_bets, leans
 
 LEDGER_COLS = ["date", "game", "player_id", "player", "player_key", "team", "opp", "stat", "side",
                "line", "book", "price", "projection", "model_prob", "mkt_fair_prob", "blended_prob",
@@ -107,7 +107,13 @@ def main():
               "core = under, 10+ games, no injury-driven projection; over (experimental) = close game, model 5%+ "
               "above the line, opponent allows above average — half stakes, weak evidence; (early) = player has 2-4 games, half stakes)\n"
               + bets[["tier", "abs_spread"] + cols].head(20).to_string(index=False))
-    else:
+    lean = leans(evald, bets)
+    if not lean.empty:
+        nl = lean[lean["why_not_a_bet"] != "qualifies"]
+        print(f"\nLEANS sheet: {len(nl)} more props the model leans on that are NOT tier bets (each row says why and "
+              f"what bets like it returned in the backtest). Top 10:")
+        print(nl[["why_not_a_bet", "backtest_roi", "player", "stat", "side", "line", "book", "price", "edge"]].head(10).to_string(index=False))
+    if bets.empty:
         watch = evald[(evald["edge"] >= config.MIN_EDGE_UNDER) & (~evald["suspicious"])
                       & (evald["book"].isin(config.BETTABLE_BOOKS) if config.BETTABLE_BOOKS else True)
                       ].sort_values("edge", ascending=False)
@@ -199,6 +205,7 @@ def append_ledger(bets: pd.DataFrame, today: date):
 
 
 def write_xlsx(path, bets, evald, proj, lines, inj=None):
+    lean = leans(evald, bets)
     bet_cols = ["tier", "abs_spread", "game", "player", "team", "opp", "stat", "side", "line", "book", "price",
                 "projection", "minutes", "model_prob", "mkt_fair_prob", "blended_prob", "edge",
                 "ev_per_dollar", "fair_price", "stake", "n_books", "n_cur", "new_team", "b2b",
@@ -214,6 +221,10 @@ def write_xlsx(path, bets, evald, proj, lines, inj=None):
     with pd.ExcelWriter(path, engine="openpyxl") as xw:
         (bets[[c for c in bet_cols if c in bets.columns]] if not bets.empty else pd.DataFrame(columns=bet_cols)
          ).to_excel(xw, sheet_name="Bets", index=False)
+        lean_cols = ["why_not_a_bet", "backtest_roi", "game", "player", "team", "opp", "stat", "side", "line", "book", "price",
+                     "projection", "mkt_fair_prob", "blended_prob", "edge", "n_books", "n_cur", "abs_spread", "inj_note"]
+        (lean[[c for c in lean_cols if c in lean.columns]] if not lean.empty else pd.DataFrame(columns=lean_cols)
+         ).to_excel(xw, sheet_name="Leans", index=False)
         evald[[c for c in bet_cols if c in evald.columns]].to_excel(xw, sheet_name="All lines", index=False)
         proj[[c for c in proj_cols if c in proj.columns]].sort_values(["game", "mu_PTS"], ascending=[True, False]
                                                                        ).to_excel(xw, sheet_name="Projections", index=False)
