@@ -2,15 +2,18 @@ player,player_key,team,pos,status,is_out,is_dtd,return_date,note,as_of
 Mouhamed Gueye,mouhamed gueye,ATL,F,Out,True,False,2026-11-20,"Gueye underwent surgery Tuesday to repair a fractured left foot that he suffered during a workout last week, Brad Rowland of the Locked On Podcast Network repor",2026-10-29
 Henri Veesaar,henri veesaar,ATL,C,Out,True,False,2027-07-01,"Veesaar was diagnosed with a torn right ACL and is expected to miss the 2026-27 season, the Hawks announced Monday.",2026-10-29
 Devin Carter,devin carter,BOS,G,Out,True,False,2026-11-08,"Carter has been diagnosed with mononucleosis and is without a timetable for a return, Gary Washburn of The Boston Globe reports.",2026-10-29
-Egor Demin,egor demin,BKN,G,Out,True,False,2026-11-07,"Demin has been diagnosed with a right leg bone bruise and will be reevaluated in one week, Ian Begley of SportsNet New York reports Thursday. The injury occurre",2026-10-29
-Tyler Bilodeau,tyler bilodeau,BKN,F,Out,True,False,2026-10-30,Bilodeau (shoulder) has been ruled out for Sunday's game against Indiana.,2026-10-29
+Egor Demin,egor demin,BKN,G,Out,True,False,2026-11-07,"The Nets exercised Demin's third-year team option for the 2027-28 season, Sharif Phillips-Keaton of USA Today reports Thursday.",2026-10-29
+Tyler Bilodeau,tyler bilodeau,BKN,F,Out,True,False,2026-11-01,Bilodeau (shoulder) has been ruled out for Sunday's game against Indiana.,2026-10-29
+Kon Knueppel,kon knueppel,CHA,G,Out,True,False,2026-11-02,"Knueppel (hamstring) will practice with the G League's Greensboro Swarm on Thursday, the Hornets announced.",2026-10-29
 Coby White,coby white,CHA,G,Out,True,False,2026-11-02,"Head coach Charles Lee said Monday that White (calf) remains without a timeline for a return, though Lee added that he'll have a better idea of where things sta",2026-10-29
-Kon Knueppel,kon knueppel,CHA,G,Out,True,False,2026-11-02,"Knueppel (hamstring) is without a timetable for a return, Rod Boone of The Charlotte Observer reports.",2026-10-29
 Grant Williams,grant williams,CHA,F,Out,True,False,2026-11-02,"Williams (hamstring) will be re-evaluated following Charlotte's upcoming two-game road trip, Rod Boone reports.",2026-10-29
 Kylan Boswell,kylan boswell,CHA,G,Out,True,False,2026-11-02,Boswell (knee) is out for Wednesday's season opener against the Nets.,2026-10-29
-Tobe Awaka,tobe awaka,CHI,F,Day-To-Day,False,True,2026-10-30,"Awaka (ankle) is out for Wednesday's game against the Knicks, Joel Lorenzi of The Athletic reports.",2026-10-29
-Patrick Williams,patrick williams,CHI,F,Out,True,False,2026-10-30,"Williams (adductor) won't play in Wednesday's game against the Knicks, Joel Lorenzi of The Athletic reports.",2026-10-29
+Patrick Williams,patrick williams,CHI,F,Out,True,False,2026-10-30,Williams (adductor) is questionable for Friday's game in Boston.,2026-10-29
+Jalen Smith,jalen smith,CHI,F,Day-To-Day,False,True,2026-10-30,Smith is questionable for Friday's game against Boston with a left finger sprain.,2026-10-29
+Tobe Awaka,tobe awaka,CHI,F,Day-To-Day,False,True,2026-10-30,Awaka (ankle) is questionable for Friday's game in Boston.,2026-10-29
 Nic Claxton,nic claxton,CHI,C,Out,True,False,2026-11-04,"Claxton (hamstring) participated in individual drills Monday morning and hopes to join the team for practice next week, Joe Cowley of the Chicago Sun-Times repo",2026-10-29
+Meleek Thomas,meleek thomas,CLE,G,Day-To-Day,False,True,2026-10-29,Thomas (foot) is questionable for Thursday's game in Atlanta.,2026-10-29
+Jaylon Tyson,jaylon tyson,CLE,G,Day-To-Day,False,True,2026-10-29,Tyson (neck) is questionable for Thursday's game against the Hawks.,2026-10-29
 Sergio de Larrea,sergio de larrea,DAL,F,Day-To-Day,False,True,2026-10-30,De Larrea (knee) has been ruled out for Wednesday's game against the Thunder.,2026-10-29
 Naji Marshall,naji marshall,DAL,F,Day-To-Day,False,True,2026-10-30,Marshall (illness) won't play in Wednesday's game against Oklahoma City.,2026-10-29
 Tarik Biberovic,tarik biberovic,DAL,F,Out,True,False,2026-10-30,Biberovic (knee) is out for Wednesday's game against the Thunder.,2026-10-29
@@ -20,22 +23,23 @@ Cameron Johnson,cameron johnson,DEN,F,Out,True,False,2026-10-30,Johnson (ankle) 
 Spencer Jones,spencer jones,DEN,F,Out,True,False,2026-11-02,Jones (hamstring) has been ruled out for Wednesday's game against New Orleans.,2026-10-29
 Alpha Diallo,alpha diallo,DEN,F,Out,True,False,2026-10-30,Diallo is out for Wednesday's game against the Pelicans due to personal reasons.,2026-10-29
 Julian Strawther,julian strawther,DEN,G,Out,True,False,2026-11-29,"Strawther (knee) was diagnosed with a left knee sprain Friday and will be re-evaluated in six weeks, Vinny Benedetto of The Denver Gazette reports.",2026-10-29
-Isaiah Joe,isaiah joe,DET,G,Day-To-Day,False,True,2026-10-30,Joe (hip) is out for Wednesday's game against the Hornets.,2026-10-29
+Isaiah Joe,isaiah joe,DET,G,Day-To-Day,False,True,2026-10-30,Joe (hip) is listed as questionable for Friday's game against Brooklyn.,2026-10-29
 Jalen Duren,jalen duren,DET,C,Out,True,False,2026-11-09,"Duren will be re-evaluated in two weeks due to a right hamstring strain, Eric Vincent of ClutchPoints.com reports.",2026-10-29
 Gui Santos,gui santos,GSW,F,Day-To-Day,False,True,2026-10-30,Santos has been ruled out for Wednesday's game against the Timberwolves due to left knee tendinitis.,2026-10-29
 Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2026-12-01,"The Warriors are exploring potential trades involving Porzingis (personal), who remains away from the team indefinitely while dealing with ongoing health concer",2026-10-29
 Moses Moody,moses moody,GSW,G,Out,True,False,2026-12-01,"Moody (knee) is progressing toward a potential return between December and January after rupturing his left patellar tendon in March, Anthony Slater of ESPN rep",2026-10-29
 Jimmy Butler III,jimmy butler,GSW,F,Out,True,False,2027-01-02,"Butler (knee) could return sometime between January and February as he continues recovering from a torn right ACL, Anthony Slater of ESPN reports.",2026-10-29
-Alperen Sengun,alperen sengun,HOU,C,Day-To-Day,False,True,2026-10-30,Sengun (back) has been ruled out for Wednesday's game against the Bucks.,2026-10-29
-Marcus Smart,marcus smart,HOU,G,Out,True,False,2026-10-30,Smart (forearm) is out for Wednesday's game against the Bucks.,2026-10-29
+Reed Sheppard,reed sheppard,HOU,G,Out,True,False,2026-10-31,Sheppard (back) is out for Friday's game against the Mavericks.,2026-10-29
+Marcus Smart,marcus smart,HOU,G,Out,True,False,2026-10-30,Smart (forearm) is questionable for Friday's game against the Mavericks.,2026-10-29
+Alperen Sengun,alperen sengun,HOU,C,Day-To-Day,False,True,2026-10-30,Sengun (back) is questionable for Friday's game against the Mavericks.,2026-10-29
 Steven Adams,steven adams,HOU,C,Out,True,False,2026-11-02,"Head coach Ime Udoka said Monday that Adams could be out ""a week or two"" due to his right soleus strain, Lachard Binkley of SI.com reports.",2026-10-29
-Ivica Zubac,ivica zubac,IND,C,Day-To-Day,False,True,2026-10-30,Zubac (ankle) is out for Wednesday's game against the 76ers.,2026-10-29
+Ivica Zubac,ivica zubac,IND,C,Day-To-Day,False,True,2026-11-01,Zubac (ankle) is out for Wednesday's game against the 76ers.,2026-10-29
 T.J. McConnell,tj mcconnell,IND,G,Out,True,False,2026-11-02,"Pacers head coach Rick Carlisle stated McConnell (hamstring) is ""doing better"" and ""getting closer"" to a return, Alex Golden of SI.com reports.",2026-10-29
 Ben Sheppard,ben sheppard,IND,G,Out,True,False,2027-01-02,"Head coach Rick Carlise confirmed Sheppard will miss ""months"" after undergoing surgery to repair a torn meniscus in his left knee, Tony East of Forbes.com repor",2026-10-29
 Tyrese Haliburton,tyrese haliburton,IND,G,Out,True,False,2026-11-13,"Haliburton (hamstring) will miss at least the next two weeks of action, Shams Charania of ESPN reports.",2026-10-29
 Johnny Furphy,johnny furphy,IND,G,Out,True,False,2027-01-02,"Furphy was diagnosed with a torn right ACL on Monday and will miss the remainder of the season, Michael Scotto of USA Today reports.",2026-10-29
+Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-08,"Niederhauser (foot) had his third-year team option picked up Thursday by the Clippers, Ohm Youngmisuk of ESPN.com reports.",2026-10-29
 Rui Hachimura,rui hachimura,LAC,F,Day-To-Day,False,True,2026-10-30,"Hachimura (quadriceps) has been ruled out for Wednesday's game against the Lakers, Joey Linn of SI.com reports.",2026-10-29
-Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-08,Niederhauser (foot) remains out for Wednesday's game against the Lakers. He also won't travel with the team for the upcoming two-game road trip in Minnesota and,2026-10-29
 Max Strus,max strus,LAC,G,Out,True,False,2026-11-08,"Strus (foot) is making progress but is set to miss at least one more week, Ohm Youngmisuk of ESPN.com reports.",2026-10-29
 Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-08,"Ingram (Achilles) is making progress but is set to miss at least one more week, Ohm Youngmisuk of ESPN.com reports.",2026-10-29
 Bradley Beal,bradley beal,LAC,G,Out,True,False,2026-11-08,"Beal (knee) will not be ready for the start of the regular season, NBA writer Justin Russo reports.",2026-10-29
@@ -44,8 +48,8 @@ Ziaire Williams,ziaire williams,LAL,F,Day-To-Day,False,True,2026-10-30,Williams 
 Luka Doncic,luka doncic,LAL,G,Day-To-Day,False,True,2026-10-30,Doncic (back) is out for Wednesday's game against the Clippers.,2026-10-29
 Cameron Carr,cameron carr,LAL,G,Out,True,False,2026-10-30,Carr (oblique) is out for Wednesday's game against the Clippers.,2026-10-29
 Adou Thiero,adou thiero,LAL,F,Out,True,False,2026-10-30,Thiero (knee) is out for Wednesday's game against the Clippers.,2026-10-29
-Simone Fontecchio,simone fontecchio,MIA,F,Day-To-Day,False,True,2026-10-30,Fontecchio (illness) is out for Wednesday's game against the Hawks.,2026-10-29
-Anthony Edwards,anthony edwards,MIN,G,Out,True,False,2026-12-21,"Edwards will undergo arthroscopic right knee surgery and is expected to miss up to two months, Shams Charania of ESPN reports.",2026-10-29
+Simone Fontecchio,simone fontecchio,MIA,F,Day-To-Day,False,True,2026-10-30,Fontecchio (illness) is listed as questionable for Friday's game against Indiana.,2026-10-29
+Anthony Edwards,anthony edwards,MIN,G,Out,True,False,2026-12-21,"Edwards underwent a successful arthroscopic procedure on his right knee Thursday, the Timberwolves announced.",2026-10-29
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-10-29
 Jordan Poole,jordan poole,NOP,G,Day-To-Day,False,True,2026-10-29,Poole (ankle) is now doubtful for Thursday against the Kings.,2026-10-29
 Yves Missi,yves missi,NOP,C,Out,True,False,2026-11-02,"Missi has been diagnosed with a left knee bone bruise and he will miss an extended period of time, Brett Siegel of ClutchPoints.com reports.",2026-10-29
@@ -56,7 +60,7 @@ Alex Caruso,alex caruso,OKC,G,Out,True,False,2026-11-04,"Caruso (ankle) is expec
 Thomas Sorber,thomas sorber,OKC,C,Out,True,False,2026-11-04,Sorber (knee) has been ruled out for Wednesday's game against the Mavericks.,2026-10-29
 Nikola Topic,nikola topic,OKC,G,Out,True,False,2026-11-04,Topic (back) will remain on the inactive list for Wednesday's game in Dallas.,2026-10-29
 Cason Wallace,cason wallace,OKC,G,Out,True,False,2027-03-02,"Wallace has been diagnosed with a torn labrum in his left shoulder and will require surgery, Shams Charania of ESPN reports.",2026-10-29
-Jonathan Isaac,jonathan isaac,ORL,F,Out,True,False,2026-10-30,Isaac (knee) has been ruled out ahead of Wednesday's game against the Raptors.,2026-10-29
+Jonathan Isaac,jonathan isaac,ORL,F,Out,True,False,2026-11-10,Isaac (knee) is out for Friday's game in Toronto.,2026-10-29
 Jalen Suggs,jalen suggs,ORL,G,Out,True,False,2026-11-10,"Suggs has been diagnosed with a mild bone bruise in his right knee and will be re-evaluated in two weeks, Shams Charania of ESPN reports.",2026-10-29
 Paolo Banchero,paolo banchero,ORL,F,Out,True,False,2026-11-22,"Banchero is expected to be sidelined for the next four-to-six weeks due to a right high-ankle sprain, Shams Charania of ESPN reports.",2026-10-29
 Noah Penda,noah penda,ORL,F,Out,True,False,2026-11-18,"Penda was diagnosed with a partially torn right hamstring Saturday, Jason Beede of the Orlando Sentinel reports.",2026-10-29
@@ -67,6 +71,7 @@ Dominick Barlow,dominick barlow,PHI,F,Out,True,False,2026-11-04,"Barlow will mis
 Ariel Hukporti,ariel hukporti,PHI,C,Out,True,False,2027-10-01,"Hukporti has sustained a season-ending ruptured right Achilles tendon, per Shams Charania of ESPN.",2026-10-29
 Oso Ighodaro,oso ighodaro,PHX,F,Day-To-Day,False,True,2026-10-30,"Ighodaro (oblique) is feeling better and considered day-to-day ahead of Friday's game against the Nuggets, John Gambadoro of Arizona Sports 98.7 FM reports.",2026-10-29
 Mark Williams,mark williams,PHX,C,Out,True,False,2027-02-03,"Williams underwent surgery Thursday to repair a torn labrum in his left shoulder and will miss an extended period of time, Shams Charania of ESPN reports.",2026-10-29
+Robert Williams III,robert williams,POR,C,Day-To-Day,False,True,2026-10-29,"Williams (knee) is doubtful for Thursday's game against Memphis due to left knee injury management, according to the Trail Blazers.",2026-10-29
 Chris Youngblood,chris youngblood,POR,G,Out,True,False,2026-10-29,Youngblood (ankle/two-way player) is out for Tuesday's game against the Lakers.,2026-10-29
 Shaedon Sharpe,shaedon sharpe,POR,G,Out,True,False,2027-03-02,"Sharpe suffered a torn meniscus in his knee and is expected to miss six months, per Shams Charania of ESPN.",2026-10-29
 Dylan Cardwell,dylan cardwell,SAC,C,Out,True,False,2026-11-06,"Cardwell (calf) will be re-evaluated in one week, Brenden Nunes of KHTK Sactown Sports 1140 reports.",2026-10-29
