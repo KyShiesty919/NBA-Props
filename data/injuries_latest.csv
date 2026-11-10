@@ -6,7 +6,7 @@ Henri Veesaar,henri veesaar,ATL,C,Out,True,False,2027-07-01,"Veesaar was diagnos
 Mikel Brown Jr.,mikel brown,BKN,G,Day-To-Day,False,True,2026-11-11,"Brown, who finished with 18 points (5-13 FG, 3-8 3Pt, 5-7 FT), one rebound, three assists and one steal over 25 minutes in Saturday's 124-121 loss to Atlanta, w",2026-11-09
 Grant Nelson,grant nelson,BKN,F,Day-To-Day,False,True,2026-11-10,"Nelson signed a two-way contract with the Nets on Friday, Michael Scotto of HoopsHype.com reports.",2026-11-09
 Egor Demin,egor demin,BKN,G,Out,True,False,2026-11-11,"The Nets exercised Demin's third-year team option for the 2027-28 season, Sharif Phillips-Keaton of USA Today reports Thursday.",2026-11-09
-Moussa Diabate,moussa diabate,CHA,F,Day-To-Day,False,True,2026-11-09,Diabate (quadriceps) is doubtful for Monday's game against the Cavaliers.,2026-11-09
+Moussa Diabate,moussa diabate,CHA,F,Out,True,False,2026-11-12,Diabate (quadriceps) has been downgraded to out for Monday's game against Cleveland.,2026-11-09
 Grant Williams,grant williams,CHA,F,Out,True,False,2026-11-12,Williams (hamstring) is out for Monday's game against the Cavaliers.,2026-11-09
 Kon Knueppel,kon knueppel,CHA,G,Out,True,False,2026-12-12,Knueppel (hamstring) was diagnosed with a left hamstring strain Sunday and will be re-evaluated in four weeks.,2026-11-09
 Dennis Schroder,dennis schroder,CHA,G,Out,True,False,2026-11-25,"Schroder has been diagnosed with a left hamstring strain and will be reevaluated in two weeks, Michael Scotto of HoopsHype.com reports.",2026-11-09
@@ -14,9 +14,8 @@ Brandon Miller,brandon miller,CHA,F,Out,True,False,2026-11-12,Miller (groin) is 
 Norman Powell,norman powell,CHI,G,Day-To-Day,False,True,2026-11-11,"Powell (shoulder) has been ruled out for Sunday's game against the 76ers, Adam Aaronson of PhillyVoice.com reports.",2026-11-09
 Zach Collins,zach collins,CHI,F,Day-To-Day,False,True,2026-11-11,Collins (illness) is out for Sunday's game against Philadelphia.,2026-11-09
 Sam Merrill,sam merrill,CLE,G,Out,True,False,2026-11-11,Merrill (elbow) is listed as out for Monday's game against the Hornets.,2026-11-09
-Jarrett Allen,jarrett allen,CLE,C,Day-To-Day,False,True,2026-11-09,Allen (knee) is questionable for Monday's game against Charlotte.,2026-11-09
 Jaylon Tyson,jaylon tyson,CLE,G,Out,True,False,2026-11-11,Tyson (ankle) is out for Monday's game against the Hornets.,2026-11-09
-Morez Johnson Jr.,morez johnson,DAL,F,Day-To-Day,False,True,2026-11-09,Johnson (leg) is questionable for Monday's game against Indiana.,2026-11-09
+Morez Johnson Jr.,morez johnson,DAL,F,Out,True,False,2026-11-12,Johnson (leg) has been ruled out for Monday's game against the Pacers.,2026-11-09
 Sergio de Larrea,sergio de larrea,DAL,F,Out,True,False,2026-11-12,De Larrea (knee) is out for Friday's game against Utah.,2026-11-09
 Tarik Biberovic,tarik biberovic,DAL,F,Out,True,False,2026-11-12,Biberovic (heel) is listed as out for Monday's game against Sacramento.,2026-11-09
 Dereck Lively II,dereck lively,DAL,C,Out,True,False,2026-11-12,Lively (foot) is listed as out for Monday's game against the Kings.,2026-11-09
@@ -35,23 +34,24 @@ Gui Santos,gui santos,GSW,F,Day-To-Day,False,True,2026-11-09,Santos (knee) is li
 Kristaps Porzingis,kristaps porzingis,GSW,C,Out,True,False,2027-01-02,Porzingis announced on his social media that he's stepping away from basketball.,2026-11-09
 Moses Moody,moses moody,GSW,G,Out,True,False,2026-12-01,"Moody (knee) is progressing toward a potential return between December and January after rupturing his left patellar tendon in March, Anthony Slater of ESPN rep",2026-11-09
 Jimmy Butler III,jimmy butler,GSW,F,Out,True,False,2027-01-02,"Butler (knee) could return sometime between January and February as he continues recovering from a torn right ACL, Anthony Slater of ESPN reports.",2026-11-09
+Clint Capela,clint capela,HOU,C,Out,True,False,2026-11-15,"Head coach Ime Udoka stated Monday that Capela (ankle) could be cleared to return either Nov. 15 in Washington or Nov. 16 in Miami, Lachard Binkley of SI.com re",2026-11-09
+Steven Adams,steven adams,HOU,C,Out,True,False,2026-11-15,"Head coach Ime Udoka said Monday that Adams could return as soon as Sunday's game at Washington, Lachard Binkley of SI.com reports.",2026-11-09
 Oscar Tshiebwe,oscar tshiebwe,HOU,C,Out,True,False,2026-11-11,Tshiebwe has been ruled out for Monday's game against the Nuggets due to an illness.,2026-11-09
-Clint Capela,clint capela,HOU,C,Out,True,False,2026-11-11,Capela (ankle) is listed as out for Monday's game against Denver.,2026-11-09
-Steven Adams,steven adams,HOU,C,Out,True,False,2026-11-11,"Head coach Ime Udoka said Wednesday that Adams (calf) is still without a timetable to return and will be evaluated on a ""weekly basis,"" Varun Shankar of the Hou",2026-11-09
-T.J. McConnell,tj mcconnell,IND,G,Day-To-Day,False,True,2026-11-09,McConnell is questionable for Monday's game against the Mavericks due to a right hamstring strain.,2026-11-09
 Tyrese Haliburton,tyrese haliburton,IND,G,Out,True,False,2026-11-13,"Haliburton (hamstring) is progressing well but does not have a timetable to return, Dustin Dopirak of The Indianapolis Star reports.",2026-11-09
 Johnny Furphy,johnny furphy,IND,G,Out,True,False,2027-01-02,"Furphy (knee) is practicing with the G League's Noblesville Boom, per Alex Golden of SI.com.",2026-11-09
 Ben Sheppard,ben sheppard,IND,G,Out,True,False,2027-01-02,"Head coach Rick Carlise confirmed Sheppard will miss ""months"" after undergoing surgery to repair a torn meniscus in his left knee, Tony East of Forbes.com repor",2026-11-09
-Isaiah Jackson,isaiah jackson,LAC,F,Day-To-Day,False,True,2026-11-10,"Jackson (groin) won't suit up for Sunday's game against the Pelicans, Law Murray of The Athletic reports.",2026-11-09
-Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-10,"Ingram (Achilles) won't play in Sunday's game against New Orleans, Law Murray of The Athletic reports.",2026-11-09
+Isaiah Jackson,isaiah jackson,LAC,F,Day-To-Day,False,True,,"Jackson (groin) won't suit up for Sunday's game against the Pelicans, Law Murray of The Athletic reports.",2026-11-09
+Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-13,"Ingram (Achilles) won't play in Sunday's game against New Orleans, Law Murray of The Athletic reports.",2026-11-09
 Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-10,The Clippers recalled Niederhauser (foot) from the G League's San Diego Clippers on Sunday.,2026-11-09
 Bradley Beal,bradley beal,LAC,G,Out,True,False,2026-11-29,"Beal (knee) will not be ready for the start of the regular season, NBA writer Justin Russo reports.",2026-11-09
 Jordan Miller,jordan miller,LAC,G,Out,True,False,2027-03-02,"Miller underwent surgery Wednesday to repair a torn left rotator cuff and will be re-evaluated in six months, per Law Murray of The Athletic.",2026-11-09
+Austin Reaves,austin reaves,LAL,G,Out,True,False,2026-11-11,"Reaves (illness) has been ruled out for Monday's game against Atlanta, Benjamin Royer of The Orange County Register reports.",2026-11-09
 Quentin Grimes,quentin grimes,LAL,G,Out,True,False,2026-11-11,"Grimes (finger) is out for Monday's game against Atlanta, per Dave McMenamin of ESPN.com.",2026-11-09
-Austin Reaves,austin reaves,LAL,G,Day-To-Day,False,True,2026-11-09,"Reaves is questionable for Monday's game against the Hawks due to an illness, per Dave McMenamin of ESPN.com.",2026-11-09
 Scotty Pippen Jr.,scotty pippen,MEM,G,Out,True,False,2026-11-11,Pippen (back) won't play in Monday's game versus the Raptors.,2026-11-09
 Isaiah Stewart,isaiah stewart,MEM,C,Out,True,False,2026-11-11,Stewart (knee) has been ruled out for Monday's game against Toronto.,2026-11-09
 Richie Saunders,richie saunders,MEM,G,Out,True,False,2026-12-01,"Saunders signed a two-way contract with the Grizzlies on Saturday, Shams Charania of ESPN reports.",2026-11-09
+Giannis Antetokounmpo,giannis antetokounmpo,MIA,F,Day-To-Day,False,True,2026-11-10,Antetokounmpo is probable for Tuesday's game against the Jazz due to a right wrist sprain.,2026-11-09
+Tyler Herro,tyler herro,MIL,G,Day-To-Day,False,True,2026-11-10,Herro (contusion) is listed as questionable for Tuesday's game against the Knicks.,2026-11-09
 Gary Trent Jr.,gary trent,MIL,G,Day-To-Day,False,True,2026-11-10,Trent (illness) won't play in Sunday's game versus the Celtics.,2026-11-09
 Anthony Edwards,anthony edwards,MIN,G,Out,True,False,2026-12-21,"Edwards underwent a successful arthroscopic procedure on his right knee Thursday, the Timberwolves announced.",2026-11-09
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-11-09
@@ -59,19 +59,18 @@ Zion Williamson,zion williamson,NOP,F,Out,True,False,2026-11-11,Williamson (rest
 Trendon Watford,trendon watford,NOP,F,Out,True,False,2026-11-11,Watford (ankle) is out for Monday's game versus Utah.,2026-11-09
 Trey Murphy III,trey murphy,NOP,F,Out,True,False,2026-11-11,Murphy (knees) has been ruled out for Monday's game against Golden State.,2026-11-09
 Yves Missi,yves missi,NOP,C,Out,True,False,2026-11-16,Missi (knee) is out for Friday's game against Minnesota.,2026-11-09
-Josh Hart,josh hart,NYK,G,Day-To-Day,False,True,2026-11-10,Hart is out for Saturday's game against the Cavaliers due to right ankle soreness.,2026-11-09
+Josh Hart,josh hart,NYK,G,Day-To-Day,False,True,2026-11-10,Hart is questionable for Tuesday's game against the Bucks due to right ankle soreness.,2026-11-09
 Jaylin Williams,jaylin williams,OKC,F,Out,True,False,2026-11-10,"Williams (back) has been ruled out for Saturday's game against the Wizards, Brandon Rahbar of DailyThunder.com reports.",2026-11-09
 Thomas Sorber,thomas sorber,OKC,C,Out,True,False,2026-11-13,Sorber (knee) is out for Wednesday's game against the Cavaliers.,2026-11-09
 Cason Wallace,cason wallace,OKC,G,Out,True,False,2027-03-02,"Wallace underwent surgery Friday to repair a torn labrum in his left shoulder and will be re-evaluated before the end of the regular season, Clemente Almanza of",2026-11-09
 Chet Holmgren,chet holmgren,OKC,C,Out,True,False,2027-01-02,"Holmgren underwent a biological treatment Friday to address a small patellar tendon tear and will miss at least 8-10 weeks, Nick Crain of Slam reports.",2026-11-09
 Jalen Williams,jalen williams,OKC,G,Out,True,False,2027-03-02,"Williams (leg) underwent successful surgery Wednesday to ""address a fractured left fibula and reconstruction of ankle ligaments following a fracture and disloca",2026-11-09
-Desmond Bane,desmond bane,ORL,G,Day-To-Day,False,True,2026-11-10,Bane (illness) has been ruled out for Saturday's game against the Warriors.,2026-11-09
-Jonathan Isaac,jonathan isaac,ORL,F,Out,True,False,2026-11-10,Orlando recalled Isaac (knee) from the G League's Osceola Magic on Wednesday.,2026-11-09
-Jalen Suggs,jalen suggs,ORL,G,Out,True,False,2026-11-10,"Suggs has been diagnosed with a mild bone bruise in his right knee and will be re-evaluated in two weeks, Shams Charania of ESPN reports.",2026-11-09
+Jalen Suggs,jalen suggs,ORL,G,Out,True,False,2026-11-16,Suggs (knee) has been ruled out for Tuesday's game against the Kings.,2026-11-09
+Jonathan Isaac,jonathan isaac,ORL,F,Out,True,False,2026-11-11,Isaac (knee) is out for Tuesday's game against Sacramento.,2026-11-09
 Paolo Banchero,paolo banchero,ORL,F,Out,True,False,2026-11-22,"Banchero is expected to be sidelined for the next four-to-six weeks due to a right high-ankle sprain, Shams Charania of ESPN reports.",2026-11-09
 Noah Penda,noah penda,ORL,F,Out,True,False,2026-11-18,"Penda was diagnosed with a partially torn right hamstring Saturday, Jason Beede of the Orlando Sentinel reports.",2026-11-09
 Izaiyah Nelson,izaiyah nelson,ORL,F,Out,True,False,2026-11-18,"Team president Jeff Weltman said Monday that Nelson (ankle) remains about a month away from returning to the court after offseason surgery, per Philip Rossman-R",2026-11-09
-Adem Bona,adem bona,PHI,C,Day-To-Day,False,True,2026-11-10,Bona (back) is out for Sunday's game in Chicago.,2026-11-09
+Adem Bona,adem bona,PHI,C,Out,True,False,2026-11-12,Bona (back) is out for Tuesday's game against the Celtics.,2026-11-09
 Dominick Barlow,dominick barlow,PHI,F,Out,True,False,2026-11-18,"Head coach Nick Nurse said Wednesday that Barlow (back) likely needs another 10-12 days before he's cleared to return to the court, Derek Bodner of AllPHLY.com ",2026-11-09
 Ariel Hukporti,ariel hukporti,PHI,C,Out,True,False,2027-10-01,"Hukporti has sustained a season-ending ruptured right Achilles tendon, per Shams Charania of ESPN.",2026-11-09
 Jordan Goodwin,jordan goodwin,PHX,G,Out,True,False,2026-11-09,Goodwin (calf) is questionable for Monday's game against the Spurs.,2026-11-09
@@ -86,18 +85,17 @@ Ben Simmons,ben simmons,SAC,G,Out,True,False,2027-10-01,"Simmons underwent succe
 Devin Vassell,devin vassell,SAS,G,Out,True,False,2026-11-11,"Vassell (groin) is out for Monday's game against the Suns, Tom Orsborn of the San Antonio Express-News reports.",2026-11-09
 Tobias Harris,tobias harris,SAS,F,Out,True,False,2026-11-11,Harris (calf) is listed as out for Monday's game against Phoenix.,2026-11-09
 Jayden Quaintance,jayden quaintance,SAS,F,Out,True,False,2026-12-03,"Quaintance has been around the team but has not yet been cleared for basketball activities, Matt Guzman of SI.com reports.",2026-11-09
-Collin Murray-Boyles,collin murray boyles,TOR,F,Day-To-Day,False,True,2026-11-09,"Murray-Boyles (illness) is questionable for Monday's game versus Memphis, per Josh Lewenberg of TSN.ca.",2026-11-09
+Immanuel Quickley,immanuel quickley,TOR,G,Out,True,False,2026-11-11,"Quickley (hamstring) has been ruled out for Monday's game against Memphis, Esfandiar Baraheni of The Athletic reports.",2026-11-09
+Collin Murray-Boyles,collin murray boyles,TOR,F,Out,True,False,2026-11-11,"Murray-Boyles (illness) is out for Monday's game against the Grizzlies, Esfandiar Baraheni of The Athletic reports.",2026-11-09
+Scottie Barnes,scottie barnes,TOR,F,Out,True,False,2026-11-11,"Barnes (groin) is out for Monday's game against the Grizzlies, Esfandiar Baraheni of The Athletic reports.",2026-11-09
 Nate Bittle,nate bittle,TOR,C,Out,True,False,2026-11-15,Bittle (foot) is listed as out for Monday's game against Memphis.,2026-11-09
-Immanuel Quickley,immanuel quickley,TOR,G,Day-To-Day,False,True,2026-11-09,"Quickley (hamstring) was a limited participant in Sunday's practice and will be listed as questionable for Monday's game against the Grizzlies, Michael Grange o",2026-11-09
-Scottie Barnes,scottie barnes,TOR,F,Day-To-Day,False,True,2026-11-09,"Barnes (adductor) was a limited participant in Sunday's practice and will be listed as questionable for Monday's game against the Grizzlies, Michael Grange of S",2026-11-09
 Kawhi Leonard,kawhi leonard,TOR,F,Out,True,False,2026-11-23,"Leonard has completed treatment to reduce swelling in his left knee and he will be re-evaluated in one week, Brett Siegel of ClutchPoints.com reports.",2026-11-09
 Lauri Markkanen,lauri markkanen,UTA,F,Day-To-Day,False,True,2026-11-10,"Markkanen (wrist) is out for Sunday's game against the Timberwolves, Shreyas Laddha of The Salt Lake Tribune reports.",2026-11-09
 Keyonte George,keyonte george,UTA,G,Day-To-Day,False,True,2026-11-10,George will not return to Sunday's game against the Timberwolves due to a right ankle injury.,2026-11-09
 Jusuf Nurkic,jusuf nurkic,UTA,C,Out,True,False,2026-11-20,Nurkic (toe) has begun participating in on-court activities as he continues recovering from a right foot injury sustained during an Oct. 4 preseason game agains,2026-11-09
 Jaren Jackson Jr.,jaren jackson,UTA,F,Out,True,False,2026-12-14,"Jackson has been diagnosed with a torn MCL in his right knee and will be sidelined for 6-to-8 weeks, per Shams Charania of ESPN.",2026-11-09
-Bilal Coulibaly,bilal coulibaly,WAS,G,Day-To-Day,False,True,2026-11-09,Coulibaly (hand) is listed as questionable for Monday's game against Detroit.,2026-11-09
+Bilal Coulibaly,bilal coulibaly,WAS,G,Out,True,False,2026-11-11,Coulibaly (hand) is out for Monday's game against the Pistons.,2026-11-09
 Tristan Vukcevic,tristan vukcevic,WAS,F,Out,True,False,2026-11-16,Vukcevic (hip) has been ruled out for Monday's game against Detroit.,2026-11-09
-Anthony Davis,anthony davis,WAS,F,Day-To-Day,False,True,2026-11-09,Davis (ankle) is listed as questionable for Monday's game in Detroit.,2026-11-09
 Reece Beekman,reece beekman,WAS,G,Out,True,False,2026-12-03,The Wizards announced Monday that Beekman sustained a right acromioclavicular joint injury and will be re-evaluated in approximately three weeks.,2026-11-09
 Justin Champagnie,justin champagnie,WAS,F,Out,True,False,2027-02-25,"Champagnie (foot) is expected to miss several months, per Josh Robbins of The Athletic.",2026-11-09
 Jamir Watkins,jamir watkins,WAS,G,Out,True,False,2027-04-02,The Wizards announced Thursday that Watkins has undergone surgery for a torn ACL.,2026-11-09
