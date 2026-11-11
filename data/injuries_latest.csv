@@ -35,9 +35,9 @@ T.J. McConnell,tj mcconnell,IND,G,Day-To-Day,False,True,2026-11-11,McConnell is 
 Tyrese Haliburton,tyrese haliburton,IND,G,Out,True,False,2026-11-13,"Haliburton (hamstring) is progressing well but does not have a timetable to return, Dustin Dopirak of The Indianapolis Star reports.",2026-11-10
 Johnny Furphy,johnny furphy,IND,G,Out,True,False,2027-01-02,"Furphy (knee) is practicing with the G League's Noblesville Boom, per Alex Golden of SI.com.",2026-11-10
 Ben Sheppard,ben sheppard,IND,G,Out,True,False,2027-01-02,"Head coach Rick Carlise confirmed Sheppard will miss ""months"" after undergoing surgery to repair a torn meniscus in his left knee, Tony East of Forbes.com repor",2026-11-10
+Cam Christie,cam christie,LAC,G,Out,True,False,2026-11-13,Christie (ankle) is listed as out for Tuesday's game against Phoenix.,2026-11-10
 Yanic Konan Niederhauser,yanic konan niederhauser,LAC,C,Out,True,False,2026-11-17,"Niederhauser (foot) is out for Tuesday's game against Phoenix, Ohm Youngmisuk of ESPN.com reports.",2026-11-10
 Brandon Ingram,brandon ingram,LAC,F,Out,True,False,2026-11-13,"Ingram (Achilles) has been ruled out for Tuesday's game at Phoenix, Ohm Youngmisuk of ESPN.com reports.",2026-11-10
-Cam Christie,cam christie,LAC,G,Day-To-Day,False,True,2026-11-10,"Christie is questionable for Tuesday's game against the Suns due to a right ankle sprain, Ohm Youngmisuk of ESPN.com reports.",2026-11-10
 Bradley Beal,bradley beal,LAC,G,Out,True,False,2026-11-29,"Beal (knee) will not be ready for the start of the regular season, NBA writer Justin Russo reports.",2026-11-10
 Jordan Miller,jordan miller,LAC,G,Out,True,False,2027-03-02,"Miller underwent surgery Wednesday to repair a torn left rotator cuff and will be re-evaluated in six months, per Law Murray of The Athletic.",2026-11-10
 Quentin Grimes,quentin grimes,LAL,G,Day-To-Day,False,True,2026-11-11,Grimes (finger) is listed as questionable for Wednesday's game in Milwaukee.,2026-11-10
@@ -45,7 +45,6 @@ Isaiah Stewart,isaiah stewart,MEM,C,Day-To-Day,False,True,2026-11-11,Stewart (kn
 Scotty Pippen Jr.,scotty pippen,MEM,G,Out,True,False,2026-11-21,"Pippen (back) remains out for Wednesday's game against Denver, Michael Wallace of the Grizzlies' official site reports.",2026-11-10
 Quinten Post,quinten post,MEM,C,Out,True,False,2026-11-13,Post (concussion) has been ruled out for Wednesday's game against the Nuggets.,2026-11-10
 Richie Saunders,richie saunders,MEM,G,Out,True,False,2026-12-01,"Saunders signed a two-way contract with the Grizzlies on Saturday, Shams Charania of ESPN reports.",2026-11-10
-Giannis Antetokounmpo,giannis antetokounmpo,MIA,F,Day-To-Day,False,True,2026-11-10,Antetokounmpo is probable for Tuesday's game against the Jazz due to a right wrist sprain.,2026-11-10
 Tyler Herro,tyler herro,MIL,G,Out,True,False,2026-11-11,Herro (knee) is listed as out for Tuesday's game against New York.,2026-11-10
 Anthony Edwards,anthony edwards,MIN,G,Out,True,False,2026-12-21,"Edwards underwent a successful arthroscopic procedure on his right knee Thursday, the Timberwolves announced.",2026-11-10
 Donte DiVincenzo,donte divincenzo,MIN,G,Out,True,False,2027-04-02,"DiVincenzo (Achilles) remains confident that he'll return during the 2026-27 season, Jon Krawczynski of The Athletic reports.",2026-11-10
@@ -58,7 +57,7 @@ Thomas Sorber,thomas sorber,OKC,C,Out,True,False,2026-11-13,Sorber (knee) is out
 Cason Wallace,cason wallace,OKC,G,Out,True,False,2027-03-02,"Wallace underwent surgery Friday to repair a torn labrum in his left shoulder and will be re-evaluated before the end of the regular season, Clemente Almanza of",2026-11-10
 Chet Holmgren,chet holmgren,OKC,C,Out,True,False,2027-01-02,"Holmgren underwent a biological treatment Friday to address a small patellar tendon tear and will miss at least 8-10 weeks, Nick Crain of Slam reports.",2026-11-10
 Jalen Williams,jalen williams,OKC,G,Out,True,False,2027-03-02,"Williams (leg) underwent successful surgery Wednesday to ""address a fractured left fibula and reconstruction of ankle ligaments following a fracture and disloca",2026-11-10
-Tristan da Silva,tristan da silva,ORL,F,Day-To-Day,False,True,2026-11-10,Da Silva is questionable for Tuesday's game against the Kings due to a left calf strain.,2026-11-10
+Tristan da Silva,tristan da silva,ORL,F,Out,True,False,2026-11-11,"Da Silva (calf) has been ruled out for Tuesday's game against the Kings, Jason Beede of the Orlando Sentinel reports.",2026-11-10
 Jalen Suggs,jalen suggs,ORL,G,Out,True,False,2026-11-16,Suggs (knee) has been ruled out for Tuesday's game against the Kings.,2026-11-10
 Jonathan Isaac,jonathan isaac,ORL,F,Out,True,False,2026-11-16,Isaac (knee) is out for Tuesday's game against Sacramento.,2026-11-10
 Paolo Banchero,paolo banchero,ORL,F,Out,True,False,2026-11-22,"Banchero is expected to be sidelined for the next four-to-six weeks due to a right high-ankle sprain, Shams Charania of ESPN reports.",2026-11-10
