@@ -23,10 +23,10 @@ Dereck Lively II,dereck lively,DAL,C,Out,True,False,2026-11-18,Lively (foot) is 
 Tarik Biberovic,tarik biberovic,DAL,F,Out,True,False,2026-11-18,Biberovic (heel) is out for Thursday's game against Minnesota.,2026-11-17
 Sergio de Larrea,sergio de larrea,DAL,F,Out,True,False,2026-11-18,De Larrea (knee) has been ruled out for Thursday's game at Minnesota.,2026-11-17
 Julian Strawther,julian strawther,DEN,G,Out,True,False,2026-11-29,"Strawther (knee) was diagnosed with a left knee sprain Friday and will be re-evaluated in six weeks, Vinny Benedetto of The Denver Gazette reports.",2026-11-17
+Duncan Robinson,duncan robinson,DET,F,Out,True,False,2026-11-27,"Robinson will be re-evaluated in one week due to a left quadriceps strain, Coty M. Davis of The Detroit News reports.",2026-11-17
 Taurean Prince,taurean prince,DET,F,Out,True,False,2026-11-18,Prince (knee) has been ruled out for Tuesday's game against the Spurs.,2026-11-17
 Ronald Holland II,ronald holland,DET,F,Out,True,False,2026-11-18,Holland is out for Tuesday's game against San Antonio due to a left knee contusion.,2026-11-17
 Isaiah Joe,isaiah joe,DET,G,Out,True,False,2026-11-17,Joe (hip) is doubtful to play in Tuesday's game against the Spurs.,2026-11-17
-Duncan Robinson,duncan robinson,DET,F,Out,True,False,2026-11-18,Robinson (quadriceps) has been ruled out for Tuesday's game against the Spurs.,2026-11-17
 Jalen Duren,jalen duren,DET,C,Out,True,False,2026-11-24,"Duren (hamstring) has begun on-court activity and will be re-evaluated in two weeks, Hunter Patterson of The Athletic reports.",2026-11-17
 Stephen Curry,stephen curry,GSW,G,Out,True,False,2026-12-12,"Curry has been diagnosed with an oblique abdominal tear and will be re-evaluated in two weeks, Shams Charania of ESPN reports.",2026-11-17
 Brandon Williams,brandon williams,GSW,G,Out,True,False,2026-11-22,"Williams (hamstring) will miss at least one week, per Anthony Slater of ESPN.com.",2026-11-17
@@ -93,6 +93,7 @@ Maxime Raynaud,maxime raynaud,SAC,C,Out,True,False,2026-11-18,Raynaud (knee) has
 Ben Simmons,ben simmons,SAC,G,Out,True,False,2027-10-01,"Simmons underwent successful surgery Tuesday to repair a torn right Achilles tendon, James Ham of ESPN 1320 Sacramento reports.",2026-11-17
 Tobias Harris,tobias harris,SAS,F,Out,True,False,2026-12-03,"Harris (calf) is likely to be sidelined until early December, per Jeff Garcia of KENS 5 San Antonio.",2026-11-17
 Jayden Quaintance,jayden quaintance,SAS,F,Out,True,False,2026-12-03,"Quaintance has been around the team but has not yet been cleared for basketball activities, Matt Guzman of SI.com reports.",2026-11-17
+Scottie Barnes,scottie barnes,TOR,F,Day-To-Day,False,True,2026-11-17,"Barnes (illness) has been downgraded to questionable for Tuesday's game against the Knicks, Blake Murphy of Sportsnet.ca reports.",2026-11-17
 Nate Bittle,nate bittle,TOR,C,Out,True,False,2026-11-23,"Bittle (foot) has been ruled out for Sunday's game against the Knicks, Zulfi Sheikh of Sportsnet.ca reports.",2026-11-17
 Kevin McCullar Jr.,kevin mccullar,TOR,G,Day-To-Day,False,True,2026-11-20,"McCullar signed a two-way contract with the Raptors on Thursday, Michael Scotto of HoopsHype.com reports.",2026-11-17
 Kawhi Leonard,kawhi leonard,TOR,F,Out,True,False,2026-11-23,"Head coach Darko Rajakovic said Wednesday that Leonard (knee) is doing individual on-court work and is progressing well, Michael Grange of Sportsnet.ca reports.",2026-11-17
@@ -100,6 +101,7 @@ Jaxson Hayes,jaxson hayes,UTA,C,Out,True,False,2026-11-18,Hayes (knee) has been 
 Lauri Markkanen,lauri markkanen,UTA,F,Out,True,False,2027-01-04,"Markkanen has been diagnosed with a non-displaced fracture in his right hand and will be sidelined for at least one month, Shams Charania of ESPN reports.",2026-11-17
 Jusuf Nurkic,jusuf nurkic,UTA,C,Out,True,False,2026-11-20,Nurkic (toe) has begun participating in on-court activities as he continues recovering from a right foot injury sustained during an Oct. 4 preseason game agains,2026-11-17
 Jaren Jackson Jr.,jaren jackson,UTA,F,Out,True,False,2026-12-14,"Jackson has been diagnosed with a torn MCL in his right knee and will be sidelined for 6-to-8 weeks, per Shams Charania of ESPN.",2026-11-17
+Felix Okpara,felix okpara,WAS,F,Day-To-Day,False,True,2026-11-18,Okpara (illness) is available for Friday's game against Toronto.,2026-11-17
 Tristan Vukcevic,tristan vukcevic,WAS,F,Out,True,False,2026-11-24,Vukcevic (hip) has been ruled out for Monday's game against Memphis.,2026-11-17
 Reece Beekman,reece beekman,WAS,G,Out,True,False,2026-12-03,The Wizards announced Monday that Beekman sustained a right acromioclavicular joint injury and will be re-evaluated in approximately three weeks.,2026-11-17
 Justin Champagnie,justin champagnie,WAS,F,Out,True,False,2027-02-25,"Champagnie (foot) is expected to miss several months, per Josh Robbins of The Athletic.",2026-11-17
